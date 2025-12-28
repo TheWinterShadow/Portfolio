@@ -7,9 +7,9 @@ import LeftContactButtons from '@/components/LeftContactButtons';
 import ThemeToggle from '@/components/ThemeToggle';
 import EasterEggs from '@/components/EasterEggs';
 
-// Use system fonts for better offline build compatibility
-// The fonts are loaded via CSS in globals.css using @import from Google Fonts
-const fontVariables = '--font-sans --font-mono';
+// Fonts are loaded via HTML link tags in the head element for better offline build compatibility
+// This allows the build to complete without network access to Google Fonts
+// CSS variables with fallback font stacks are defined in globals.css
 
 export const metadata: Metadata = {
   title: 'The Winter Shadow | Security Engineer & Developer',
