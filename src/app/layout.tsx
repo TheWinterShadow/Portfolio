@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { Inter, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { LayoutProvider } from '@/lib/layout-context';
@@ -8,17 +7,9 @@ import LeftContactButtons from '@/components/LeftContactButtons';
 import ThemeToggle from '@/components/ThemeToggle';
 import EasterEggs from '@/components/EasterEggs';
 
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-sans',
-  display: 'swap',
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  variable: '--font-mono',
-  display: 'swap',
-});
+// Use system fonts for better offline build compatibility
+// The fonts are loaded via CSS in globals.css using @import from Google Fonts
+const fontVariables = '--font-sans --font-mono';
 
 export const metadata: Metadata = {
   title: 'The Winter Shadow | Security Engineer & Developer',
@@ -39,7 +30,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..800&display=swap" rel="stylesheet" />
+      </head>
+      <body className="font-sans antialiased">
         <ThemeProvider>
           <LayoutProvider>
             <EasterEggs />
