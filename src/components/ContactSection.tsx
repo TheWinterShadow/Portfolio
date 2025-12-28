@@ -9,9 +9,12 @@ export default function ContactSection() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    company: '',
     projectType: '',
+    timeline: '',
     budgetRange: '',
     message: '',
+    referral: '',
   });
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
@@ -32,7 +35,7 @@ export default function ContactSection() {
         // Fallback to simulation if not configured
         setTimeout(() => {
           setStatus('success');
-          setFormData({ name: '', email: '', projectType: '', budgetRange: '', message: '' });
+          setFormData({ name: '', email: '', company: '', projectType: '', timeline: '', budgetRange: '', message: '', referral: '' });
           setTimeout(() => setStatus('idle'), 3000);
         }, 1000);
         return;
@@ -44,9 +47,12 @@ export default function ContactSection() {
       const templateParams = {
         name: formData.name,
         email: formData.email,
+        company: formData.company,
         projectType: formData.projectType,
+        timeline: formData.timeline,
         budgetRange: formData.budgetRange,
         message: formData.message,
+        referral: formData.referral,
       };
 
       console.log('Sending email with params:', { serviceId, templateId, templateParams });
@@ -55,7 +61,16 @@ export default function ContactSection() {
       await emailjs.send(serviceId, templateId, templateParams, publicKey);
 
       setStatus('success');
-      setFormData({ name: '', email: '', projectType: '', budgetRange: '', message: '' });
+      setFormData({ 
+        name: '', 
+        email: '', 
+        company: '',
+        projectType: '', 
+        timeline: '',
+        budgetRange: '', 
+        message: '',
+        referral: ''
+      });
       setTimeout(() => setStatus('idle'), 3000);
     } catch (error: any) {
       console.error('EmailJS error:', error);
@@ -105,7 +120,7 @@ export default function ContactSection() {
             className="bg-[var(--theme-bg)] border border-[var(--theme-border)] rounded-lg p-6"
           >
             <h3 className="text-2xl font-semibold text-[var(--theme-text)] mb-6">
-              Send a Message
+              Or Send Me a Message
             </h3>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
@@ -113,7 +128,7 @@ export default function ContactSection() {
                   htmlFor="name"
                   className="block text-sm font-medium text-[var(--theme-text)] mb-2"
                 >
-                  Name
+                  Your Name
                 </label>
                 <input
                   type="text"
@@ -127,55 +142,10 @@ export default function ContactSection() {
               </div>
               <div>
                 <label
-                  htmlFor="projectType"
-                  className="block text-sm font-medium text-[var(--theme-text)] mb-2"
-                >
-                  Project Type
-                </label>
-                <select
-                  id="projectType"
-                  name="projectType"
-                  value={formData.projectType}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 bg-[var(--theme-surface)] border border-[var(--theme-border)] rounded-lg text-[var(--theme-text)] focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)]"
-                >
-                  <option value="">Select a project type...</option>
-                  <option value="Security Audit">Security Audit</option>
-                  <option value="Backend Development">Backend Development</option>
-                  <option value="Infrastructure">Infrastructure & DevOps</option>
-                  <option value="Retainer">Technical Retainer</option>
-                  <option value="Other">Other / Custom Project</option>
-                </select>
-              </div>
-              <div>
-                <label
-                  htmlFor="budgetRange"
-                  className="block text-sm font-medium text-[var(--theme-text)] mb-2"
-                >
-                  Budget Range
-                </label>
-                <select
-                  id="budgetRange"
-                  name="budgetRange"
-                  value={formData.budgetRange}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 bg-[var(--theme-surface)] border border-[var(--theme-border)] rounded-lg text-[var(--theme-text)] focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)]"
-                >
-                  <option value="">Select budget range...</option>
-                  <option value="$5K-10K">$5K - $10K</option>
-                  <option value="$10K-25K">$10K - $25K</option>
-                  <option value="$25K+">$25K+</option>
-                  <option value="Not Sure">Not Sure Yet</option>
-                </select>
-              </div>
-              <div>
-                <label
                   htmlFor="email"
                   className="block text-sm font-medium text-[var(--theme-text)] mb-2"
                 >
-                  Email
+                  Email Address
                 </label>
                 <input
                   type="email"
@@ -189,10 +159,98 @@ export default function ContactSection() {
               </div>
               <div>
                 <label
+                  htmlFor="company"
+                  className="block text-sm font-medium text-[var(--theme-text)] mb-2"
+                >
+                  Company Name <span className="text-[var(--theme-text-secondary)] text-xs">(optional)</span>
+                </label>
+                <input
+                  type="text"
+                  id="company"
+                  name="company"
+                  value={formData.company}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 bg-[var(--theme-surface)] border border-[var(--theme-border)] rounded-lg text-[var(--theme-text)] focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)]"
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="projectType"
+                  className="block text-sm font-medium text-[var(--theme-text)] mb-2"
+                >
+                  What type of security help do you need?
+                </label>
+                <select
+                  id="projectType"
+                  name="projectType"
+                  value={formData.projectType}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 bg-[var(--theme-surface)] border border-[var(--theme-border)] rounded-lg text-[var(--theme-text)] focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)]"
+                >
+                  <option value="">Select a project type...</option>
+                  <option value="Security Audit / Compliance">Security Audit / Compliance</option>
+                  <option value="IAM / Access Control Architecture">IAM / Access Control Architecture</option>
+                  <option value="Security Automation / Tooling">Security Automation / Tooling</option>
+                  <option value="Incident Response / Forensics">Incident Response / Forensics</option>
+                  <option value="AI/ML Security">AI/ML Security</option>
+                  <option value="Security Retainer / Ongoing Support">Security Retainer / Ongoing Support</option>
+                  <option value="Not sure / Multiple areas">Not sure / Multiple areas</option>
+                </select>
+              </div>
+              <div>
+                <label
+                  htmlFor="timeline"
+                  className="block text-sm font-medium text-[var(--theme-text)] mb-2"
+                >
+                  What&apos;s your timeline?
+                </label>
+                <select
+                  id="timeline"
+                  name="timeline"
+                  value={formData.timeline}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 bg-[var(--theme-surface)] border border-[var(--theme-border)] rounded-lg text-[var(--theme-text)] focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)]"
+                >
+                  <option value="">Select timeline...</option>
+                  <option value="Urgent (this week)">Urgent (this week)</option>
+                  <option value="Soon (next 2-4 weeks)">Soon (next 2-4 weeks)</option>
+                  <option value="Planning ahead (next quarter)">Planning ahead (next quarter)</option>
+                  <option value="Just exploring options">Just exploring options</option>
+                </select>
+              </div>
+              <div>
+                <label
+                  htmlFor="budgetRange"
+                  className="block text-sm font-medium text-[var(--theme-text)] mb-2"
+                >
+                  Budget Range <span className="text-[var(--theme-text-secondary)] text-xs">(helps me recommend the right approach)</span>
+                </label>
+                <select
+                  id="budgetRange"
+                  name="budgetRange"
+                  value={formData.budgetRange}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 bg-[var(--theme-surface)] border border-[var(--theme-border)] rounded-lg text-[var(--theme-text)] focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)]"
+                >
+                  <option value="">Select budget range...</option>
+                  <option value="Under $1,000 (advisory/mentorship only)">Under $1,000 (advisory/mentorship only)</option>
+                  <option value="$1,000 - $5,000 (rapid reviews)">$1,000 - $5,000 (rapid reviews)</option>
+                  <option value="$5,000 - $15,000 (smaller projects)">$5,000 - $15,000 (smaller projects)</option>
+                  <option value="$15,000 - $30,000 (standard projects)">$15,000 - $30,000 (standard projects)</option>
+                  <option value="$30,000 - $50,000 (comprehensive projects)">$30,000 - $50,000 (comprehensive projects)</option>
+                  <option value="$50,000+ (enterprise engagements)">$50,000+ (enterprise engagements)</option>
+                  <option value="Monthly retainer ($3.5K - $12K/month)">Monthly retainer ($3.5K - $12K/month)</option>
+                  <option value="Not sure yet">Not sure yet</option>
+                </select>
+              </div>
+              <div>
+                <label
                   htmlFor="message"
                   className="block text-sm font-medium text-[var(--theme-text)] mb-2"
                 >
-                  Message
+                  Tell me about your security challenge
                 </label>
                 <textarea
                   id="message"
@@ -201,8 +259,31 @@ export default function ContactSection() {
                   onChange={handleChange}
                   required
                   rows={5}
+                  placeholder="Example: We're preparing for SOC 2 audit in 3 months and need help with security controls and documentation..."
                   className="w-full px-4 py-2 bg-[var(--theme-surface)] border border-[var(--theme-border)] rounded-lg text-[var(--theme-text)] focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] resize-none"
                 />
+              </div>
+              <div>
+                <label
+                  htmlFor="referral"
+                  className="block text-sm font-medium text-[var(--theme-text)] mb-2"
+                >
+                  How did you find me?
+                </label>
+                <select
+                  id="referral"
+                  name="referral"
+                  value={formData.referral}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 bg-[var(--theme-surface)] border border-[var(--theme-border)] rounded-lg text-[var(--theme-text)] focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)]"
+                >
+                  <option value="">Select an option...</option>
+                  <option value="Google search">Google search</option>
+                  <option value="LinkedIn">LinkedIn</option>
+                  <option value="GitHub">GitHub</option>
+                  <option value="Referral">Referral from: [text input]</option>
+                  <option value="Other">Other</option>
+                </select>
               </div>
               <motion.button
                 type="submit"
@@ -229,7 +310,7 @@ export default function ContactSection() {
                 ) : (
                   <>
                     <Send size={20} />
-                    <span>Send Message</span>
+                    <span>Send Message — I&apos;ll Respond Within 24 Hours</span>
                   </>
                 )}
               </motion.button>
