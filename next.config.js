@@ -4,13 +4,13 @@ const nextConfig = {
   // Update basePath to match your GitHub repository name
   // For example: '/Portfolio' if your repo is 'Portfolio'
   // Leave empty string '' if deploying to custom domain
-  basePath: process.env.NODE_ENV === 'production' ? '/Portfolio' : '',
+  basePath: '',
   images: {
     unoptimized: true,
   },
   trailingSlash: true,
   // Disable image optimization for static export
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/Portfolio' : '',
+  assetPrefix: '',
 }
 
 module.exports = nextConfig
