@@ -11,7 +11,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronDown, Code, Shield, Server } from 'lucide-react';
+import { ChevronDown, Code, Shield, Server, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
 
 /**
@@ -19,9 +19,9 @@ import Link from 'next/link';
  * These taglines highlight different aspects of the developer's expertise
  */
 const taglines = [
-  'Building secure systems',
-  'Automating security workflows',
-  'Bridging dev & security',
+  'Security audits that prevent breaches',
+  'Infrastructure that scales with you',
+  'One expert, end-to-end delivery',
 ];
 
 /**
@@ -93,10 +93,14 @@ export default function Hero() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <h1 className="text-5xl md:text-7xl font-bold mb-4">
-            <span className="text-[var(--theme-text)]">Elijah Winter</span>
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+            <span className="text-[var(--theme-text)]">
+              Secure, Scalable Technical Solutions
+            </span>
             <br />
-            <span className="text-[var(--theme-primary)]">/ The Winter Shadow</span>
+            <span className="text-[var(--theme-primary)]">
+              —Without the Enterprise Price Tag
+            </span>
           </h1>
         </motion.div>
 
@@ -104,9 +108,9 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3, delay: 0.1 }}
-          className="text-xl md:text-2xl text-[var(--theme-text-secondary)] mb-8"
+          className="text-lg md:text-xl text-[var(--theme-text-secondary)] mb-8 max-w-3xl mx-auto"
         >
-          Security Engineer | Developer | IT Specialist
+          I help startups and growing businesses build bulletproof systems, from security audits to production-ready infrastructure. One expert, end-to-end delivery.
         </motion.div>
 
         <motion.div
@@ -131,26 +135,47 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3, delay: 0.3 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
         >
+          <Link href="/services">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-8 py-4 bg-[var(--theme-primary)] text-white rounded-lg font-semibold hover:bg-[var(--theme-secondary)] transition-colors shadow-lg text-lg"
+            >
+              View Services & Pricing
+            </motion.button>
+          </Link>
           <Link href="/projects">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-3 bg-[var(--theme-primary)] text-white rounded-lg font-semibold hover:bg-[var(--theme-secondary)] transition-colors shadow-lg"
+              className="px-8 py-4 border-2 border-[var(--theme-primary)] text-[var(--theme-primary)] rounded-lg font-semibold hover:bg-[var(--theme-primary)]/10 transition-colors text-lg"
             >
-              View Projects
+              See My Work
             </motion.button>
           </Link>
-          <Link href="/contact">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-3 border-2 border-[var(--theme-primary)] text-[var(--theme-primary)] rounded-lg font-semibold hover:bg-[var(--theme-primary)]/10 transition-colors"
-            >
-              Contact Me
-            </motion.button>
-          </Link>
+        </motion.div>
+
+        {/* Trust Badge Bar */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3, delay: 0.4 }}
+          className="flex flex-wrap justify-center gap-6 md:gap-8 text-sm md:text-base text-[var(--theme-text-secondary)] mb-8"
+        >
+          <span className="flex items-center gap-2">
+            <CheckCircle size={18} className="text-[var(--theme-primary)]" />
+            10+ Projects Delivered
+          </span>
+          <span className="flex items-center gap-2">
+            <CheckCircle size={18} className="text-[var(--theme-primary)]" />
+            Security-First Approach
+          </span>
+          <span className="flex items-center gap-2">
+            <CheckCircle size={18} className="text-[var(--theme-primary)]" />
+            Full-Stack Expertise
+          </span>
         </motion.div>
 
         {/* Icon Row */}

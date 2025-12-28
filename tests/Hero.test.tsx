@@ -65,21 +65,21 @@ describe('Hero Component', () => {
     test('renders main heading with correct text', () => {
       render(<Hero />);
       
-      expect(screen.getByText('Elijah Winter')).toBeInTheDocument();
-      expect(screen.getByText('/ The Winter Shadow')).toBeInTheDocument();
+      expect(screen.getByText('Secure, Scalable Technical Solutions')).toBeInTheDocument();
+      expect(screen.getByText('—Without the Enterprise Price Tag')).toBeInTheDocument();
     });
 
     test('renders subtitle with professional roles', () => {
       render(<Hero />);
       
-      expect(screen.getByText('Security Engineer | Developer | IT Specialist')).toBeInTheDocument();
+      expect(screen.getByText(/I help startups and growing businesses build bulletproof systems/)).toBeInTheDocument();
     });
 
     test('renders call-to-action buttons', () => {
       render(<Hero />);
       
-      expect(screen.getByRole('link', { name: /view projects/i })).toBeInTheDocument();
-      expect(screen.getByRole('link', { name: /contact me/i })).toBeInTheDocument();
+      expect(screen.getByRole('link', { name: /see my work/i })).toBeInTheDocument();
+      expect(screen.getByRole('link', { name: /view services & pricing/i })).toBeInTheDocument();
     });
 
     test('renders expertise icons with labels', () => {
@@ -98,14 +98,14 @@ describe('Hero Component', () => {
     test('displays initial tagline on mount', () => {
       render(<Hero />);
       
-      expect(screen.getByText('Building secure systems')).toBeInTheDocument();
+      expect(screen.getByText('Security audits that prevent breaches')).toBeInTheDocument();
     });
 
     test('rotates to next tagline after 3 seconds', async () => {
       render(<Hero />);
       
       // Initial tagline
-      expect(screen.getByText('Building secure systems')).toBeInTheDocument();
+      expect(screen.getByText('Security audits that prevent breaches')).toBeInTheDocument();
       
       // Advance timers by 3 seconds with act wrapper
       act(() => {
@@ -114,7 +114,7 @@ describe('Hero Component', () => {
       
       // Should show second tagline
       await waitFor(() => {
-        expect(screen.getByText('Automating security workflows')).toBeInTheDocument();
+        expect(screen.getByText('Infrastructure that scales with you')).toBeInTheDocument();
       });
     });
 
@@ -122,9 +122,9 @@ describe('Hero Component', () => {
       render(<Hero />);
       
       const taglines = [
-        'Building secure systems',
-        'Automating security workflows',
-        'Bridging dev & security',
+        'Security audits that prevent breaches',
+        'Infrastructure that scales with you',
+        'One expert, end-to-end delivery',
       ];
       
       // Test each tagline appears in sequence
@@ -163,38 +163,38 @@ describe('Hero Component', () => {
    * Navigation and interaction tests
    */
   describe('User Interactions', () => {
-    test('View Projects button has correct href', () => {
+    test('See My Work button has correct href', () => {
       render(<Hero />);
       
-      const projectsButton = screen.getByRole('link', { name: /view projects/i });
+      const projectsButton = screen.getByRole('link', { name: /see my work/i });
       expect(projectsButton).toHaveAttribute('href', '/projects');
     });
 
-    test('Contact Me button has correct href', () => {
+    test('View Services button has correct href', () => {
       render(<Hero />);
       
-      const contactButton = screen.getByRole('link', { name: /contact me/i });
-      expect(contactButton).toHaveAttribute('href', '/contact');
+      const servicesButton = screen.getByRole('link', { name: /view services & pricing/i });
+      expect(servicesButton).toHaveAttribute('href', '/services');
     });
 
     test('buttons are clickable and focusable', async () => {
       const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
       render(<Hero />);
       
-      const projectsButton = screen.getByRole('button', { name: /view projects/i });
-      const contactButton = screen.getByRole('button', { name: /contact me/i });
+      const projectsButton = screen.getByRole('button', { name: /see my work/i });
+      const servicesButton = screen.getByRole('button', { name: /view services & pricing/i });
       
       // Test that buttons are in the document and clickable
       expect(projectsButton).toBeInTheDocument();
-      expect(contactButton).toBeInTheDocument();
+      expect(servicesButton).toBeInTheDocument();
       
       // Test click events (even though they're mocked)
       await user.click(projectsButton);
-      await user.click(contactButton);
+      await user.click(servicesButton);
       
       // Verify the buttons are still accessible after interaction
       expect(projectsButton).toBeInTheDocument();
-      expect(contactButton).toBeInTheDocument();
+      expect(servicesButton).toBeInTheDocument();
     });
   });
 
@@ -206,7 +206,7 @@ describe('Hero Component', () => {
       render(<Hero />);
       
       // Get the main section by finding the parent section of the heading
-      const heroSection = screen.getByText('Elijah Winter').closest('section');
+      const heroSection = screen.getByText('Secure, Scalable Technical Solutions').closest('section');
       
       expect(heroSection).toBeInTheDocument();
       expect(heroSection).toHaveAttribute('id', 'home');
@@ -217,7 +217,7 @@ describe('Hero Component', () => {
       render(<Hero />);
       
       // Check for background gradient containers
-      const heroSection = screen.getByText('Elijah Winter').closest('section');
+      const heroSection = screen.getByText('Secure, Scalable Technical Solutions').closest('section');
       const backgroundElements = heroSection?.querySelectorAll('.absolute');
       
       expect(backgroundElements).toBeTruthy();
@@ -229,10 +229,10 @@ describe('Hero Component', () => {
       
       // Check that responsive classes exist on the main container
       const heading = screen.getByRole('heading', { level: 1 });
-      expect(heading).toHaveClass('text-5xl', 'md:text-7xl');
+      expect(heading).toHaveClass('text-4xl', 'md:text-6xl');
       
-      const subtitle = screen.getByText('Security Engineer | Developer | IT Specialist');
-      expect(subtitle).toHaveClass('text-xl', 'md:text-2xl');
+      const subtitle = screen.getByText(/I help startups and growing businesses/);
+      expect(subtitle).toHaveClass('text-lg', 'md:text-xl');
     });
   });
 
@@ -245,24 +245,24 @@ describe('Hero Component', () => {
       
       const mainHeading = screen.getByRole('heading', { level: 1 });
       expect(mainHeading).toBeInTheDocument();
-      expect(mainHeading).toHaveTextContent('Elijah Winter/ The Winter Shadow');
+      expect(mainHeading).toHaveTextContent('Secure, Scalable Technical Solutions—Without the Enterprise Price Tag');
     });
 
     test('has accessible navigation links', () => {
       render(<Hero />);
       
-      const projectsLink = screen.getByRole('link', { name: /view projects/i });
-      const contactLink = screen.getByRole('link', { name: /contact me/i });
+      const projectsLink = screen.getByRole('link', { name: /see my work/i });
+      const servicesLink = screen.getByRole('link', { name: /view services & pricing/i });
       
       expect(projectsLink).toBeInTheDocument();
-      expect(contactLink).toBeInTheDocument();
+      expect(servicesLink).toBeInTheDocument();
     });
 
     test('has proper ARIA labels and semantic structure', () => {
       render(<Hero />);
       
       // Check that the main section has proper ID for navigation
-      const heroSection = screen.getByText('Elijah Winter').closest('section');
+      const heroSection = screen.getByText('Secure, Scalable Technical Solutions').closest('section');
       expect(heroSection).toHaveAttribute('id', 'home');
     });
 
@@ -270,8 +270,8 @@ describe('Hero Component', () => {
       render(<Hero />);
       
       // All interactive elements should have descriptive text
-      expect(screen.getByText('View Projects')).toBeInTheDocument();
-      expect(screen.getByText('Contact Me')).toBeInTheDocument();
+      expect(screen.getByText('See My Work')).toBeInTheDocument();
+      expect(screen.getByText('View Services & Pricing')).toBeInTheDocument();
       expect(screen.getByText('Security')).toBeInTheDocument();
       expect(screen.getByText('Development')).toBeInTheDocument();
       expect(screen.getByText('Infrastructure')).toBeInTheDocument();

@@ -8,8 +8,9 @@ import emailjs from '@emailjs/browser';
 export default function ContactSection() {
   const [formData, setFormData] = useState({
     name: '',
-    title: '',
     email: '',
+    projectType: '',
+    budgetRange: '',
     message: '',
   });
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
@@ -31,7 +32,7 @@ export default function ContactSection() {
         // Fallback to simulation if not configured
         setTimeout(() => {
           setStatus('success');
-          setFormData({ name: '', title: '', email: '', message: '' });
+          setFormData({ name: '', email: '', projectType: '', budgetRange: '', message: '' });
           setTimeout(() => setStatus('idle'), 3000);
         }, 1000);
         return;
@@ -39,11 +40,12 @@ export default function ContactSection() {
 
       // Prepare template parameters
       // Note: The recipient email should be set in your EmailJS template dashboard
-      // Template variables should match what you have in your EmailJS template (e.g., {{name}}, {{title}}, {{email}}, {{message}})
+      // Template variables should match what you have in your EmailJS template
       const templateParams = {
         name: formData.name,
-        title: formData.title,
         email: formData.email,
+        projectType: formData.projectType,
+        budgetRange: formData.budgetRange,
         message: formData.message,
       };
 
@@ -53,7 +55,7 @@ export default function ContactSection() {
       await emailjs.send(serviceId, templateId, templateParams, publicKey);
 
       setStatus('success');
-      setFormData({ name: '', title: '', email: '', message: '' });
+      setFormData({ name: '', email: '', projectType: '', budgetRange: '', message: '' });
       setTimeout(() => setStatus('idle'), 3000);
     } catch (error: any) {
       console.error('EmailJS error:', error);
@@ -80,7 +82,7 @@ export default function ContactSection() {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
@@ -125,20 +127,48 @@ export default function ContactSection() {
               </div>
               <div>
                 <label
-                  htmlFor="title"
+                  htmlFor="projectType"
                   className="block text-sm font-medium text-[var(--theme-text)] mb-2"
                 >
-                  Title
+                  Project Type
                 </label>
-                <input
-                  type="text"
-                  id="title"
-                  name="title"
-                  value={formData.title}
+                <select
+                  id="projectType"
+                  name="projectType"
+                  value={formData.projectType}
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-2 bg-[var(--theme-surface)] border border-[var(--theme-border)] rounded-lg text-[var(--theme-text)] focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)]"
-                />
+                >
+                  <option value="">Select a project type...</option>
+                  <option value="Security Audit">Security Audit</option>
+                  <option value="Backend Development">Backend Development</option>
+                  <option value="Infrastructure">Infrastructure & DevOps</option>
+                  <option value="Retainer">Technical Retainer</option>
+                  <option value="Other">Other / Custom Project</option>
+                </select>
+              </div>
+              <div>
+                <label
+                  htmlFor="budgetRange"
+                  className="block text-sm font-medium text-[var(--theme-text)] mb-2"
+                >
+                  Budget Range
+                </label>
+                <select
+                  id="budgetRange"
+                  name="budgetRange"
+                  value={formData.budgetRange}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 bg-[var(--theme-surface)] border border-[var(--theme-border)] rounded-lg text-[var(--theme-text)] focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)]"
+                >
+                  <option value="">Select budget range...</option>
+                  <option value="$5K-10K">$5K - $10K</option>
+                  <option value="$10K-25K">$10K - $25K</option>
+                  <option value="$25K+">$25K+</option>
+                  <option value="Not Sure">Not Sure Yet</option>
+                </select>
               </div>
               <div>
                 <label
