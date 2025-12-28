@@ -20,11 +20,16 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     setMounted(true);
-    const savedTheme = localStorage.getItem('theme') as ThemeName | null;
-    const savedColorMode = localStorage.getItem('colorMode') as ColorMode | null;
-    
-    if (savedTheme) setThemeNameState(savedTheme);
-    if (savedColorMode) setColorMode(savedColorMode);
+    try {
+      const savedTheme = localStorage?.getItem('theme') as ThemeName | null;
+      const savedColorMode = localStorage?.getItem('colorMode') as ColorMode | null;
+      
+      if (savedTheme) setThemeNameState(savedTheme);
+      if (savedColorMode) setColorMode(savedColorMode);
+    } catch (error) {
+      // Handle localStorage errors gracefully (e.g., in SSR or private browsing)
+      console.warn('Could not access localStorage:', error);
+    }
   }, []);
 
   useEffect(() => {
@@ -32,8 +37,12 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       const theme = getTheme(themeName, colorMode);
       applyTheme(theme);
       document.documentElement.classList.toggle('dark', colorMode === 'dark');
-      localStorage.setItem('theme', themeName);
-      localStorage.setItem('colorMode', colorMode);
+      try {
+        localStorage?.setItem('theme', themeName);
+        localStorage?.setItem('colorMode', colorMode);
+      } catch (error) {
+        console.warn('Could not save to localStorage:', error);
+      }
     } else {
       // Apply default theme on initial mount to prevent flash
       const theme = getTheme(themeName, colorMode);

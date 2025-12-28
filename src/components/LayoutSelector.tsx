@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Layout, X, Check } from 'lucide-react';
 import { useLayout } from '@/lib/layout-context';
+import { LayoutId } from '@/types/theme';
 
 const layouts = [
   { id: 'modern', name: 'Modern Portfolio', description: 'Clean, professional design inspired by modern portfolio sites' },
@@ -73,7 +74,7 @@ export default function LayoutSelector() {
                     <motion.button
                       key={layoutOption.id}
                       onClick={() => {
-                        setLayout(layoutOption.id);
+                        setLayout(layoutOption.id as LayoutId);
                         setIsOpen(false);
                       }}
                       whileHover={{ scale: 1.02 }}

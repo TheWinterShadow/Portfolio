@@ -113,9 +113,9 @@ export default function CyberLayout() {
                   <span className="text-[var(--theme-secondary)]">developer</span> = {'{'}
                 </h1>
                 <div className="ml-8 space-y-2 text-[var(--theme-text-secondary)] font-mono">
-                  <p><span className="text-[var(--theme-primary)]">name:</span> "Elijah Winter",</p>
-                  <p><span className="text-[var(--theme-primary)]">role:</span> "Security Engineer | Developer",</p>
-                  <p><span className="text-[var(--theme-primary)]">tagline:</span> "Building secure systems",</p>
+                  <p><span className="text-[var(--theme-primary)]">name:</span> &quot;Elijah Winter&quot;,</p>
+                  <p><span className="text-[var(--theme-primary)]">role:</span> &quot;Security Engineer | Developer&quot;,</p>
+                  <p><span className="text-[var(--theme-primary)]">tagline:</span> &quot;Building secure systems&quot;,</p>
                 </div>
                 <p className="text-[var(--theme-text)] font-mono">{'}'}</p>
               </div>

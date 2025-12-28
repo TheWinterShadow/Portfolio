@@ -129,9 +129,9 @@ export default function ProjectCard({ project, onClick }: ProjectCardProps) {
                 <Github size={18} className="text-[var(--theme-text-secondary)]" />
               </a>
             )}
-            {project.links.liveDemo && (
+            {project.media?.liveDemo && (
               <a
-                href={project.links.liveDemo}
+                href={project.media.liveDemo}
                 onClick={(e) => e.stopPropagation()}
                 target="_blank"
                 rel="noopener noreferrer"

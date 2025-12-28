@@ -153,6 +153,92 @@ Themes are defined in `src/lib/themes.ts`. Each theme has:
 
 To modify a theme, edit the color values in the `themes` and `lightThemes` objects.
 
+## 🧪 Testing
+
+The project includes comprehensive testing with Jest and React Testing Library.
+
+### Test Scripts
+
+```bash
+# Run all tests
+npm test
+
+# Run tests in watch mode during development
+npm run test:watch
+
+# Run tests with coverage report
+npm run test:coverage
+
+# Run tests in CI mode (for GitHub Actions)
+npm run test:ci
+
+# Debug tests
+npm run test:debug
+
+# Type checking
+npm run type-check
+```
+
+### Test Coverage
+
+The test suite covers:
+- **Utility functions** - All helper functions with edge cases
+- **React components** - Rendering, interactions, and accessibility  
+- **Data validation** - Project data integrity and consistency
+- **Theme system** - Theme switching and CSS variable application
+- **Responsive behavior** - Mobile and desktop layouts
+- **User interactions** - Button clicks, form submissions, navigation
+
+Current coverage targets:
+- **Lines**: 70%+
+- **Functions**: 70%+
+- **Branches**: 70%+
+- **Statements**: 70%+
+
+### Test Structure
+
+```
+src/
+├── components/
+│   ├── __tests__/
+│   │   ├── Hero.test.tsx
+│   │   └── ProjectCard.test.tsx
+│   └── Hero.tsx
+├── lib/
+│   ├── __tests__/
+│   │   ├── utils.test.ts
+│   │   └── themes.test.ts
+│   └── utils.ts
+└── data/
+    ├── __tests__/
+    │   └── projects.test.ts
+    └── projects.ts
+```
+
+### Writing Tests
+
+Example component test:
+```typescript
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import MyComponent from '../MyComponent';
+
+describe('MyComponent', () => {
+  test('renders correctly', () => {
+    render(<MyComponent />);
+    expect(screen.getByText('Hello World')).toBeInTheDocument();
+  });
+  
+  test('handles user interactions', async () => {
+    const user = userEvent.setup();
+    render(<MyComponent />);
+    
+    await user.click(screen.getByRole('button'));
+    expect(screen.getByText('Clicked!')).toBeInTheDocument();
+  });
+});
+```
+
 ## 🚢 Deployment
 
 ### GitHub Pages
@@ -189,9 +275,81 @@ npm run build
 - **Animations**: Framer Motion
 - **Icons**: Lucide React
 - **TypeScript**: Full type safety
+- **Testing**: Jest + React Testing Library
+- **CI/CD**: GitHub Actions (Build → Lint → Test → Deploy)
 - **Deployment**: GitHub Pages + GitHub Actions
 
-## 📊 Performance
+## 🔄 CI/CD Pipeline
+
+The project uses a comprehensive GitHub Actions workflow:
+
+1. **Lint** - ESLint + TypeScript type checking
+2. **Test** - Jest with coverage reporting
+3. **Build** - Next.js production build with verification
+4. **Deploy** - Automatic deployment to GitHub Pages
+
+### Workflow Files
+
+- `.github/workflows/ci.yml` - Main CI pipeline
+- `.github/workflows/build.yml` - Build verification
+- `.github/workflows/lint.yml` - Code quality checks
+- `.github/workflows/test.yml` - Test execution
+- `.github/workflows/deploy.yml` - Deployment automation
+
+All workflows run on push to `main` and pull requests, ensuring code quality before deployment.
+
+## � Documentation
+
+The codebase follows comprehensive documentation standards:
+
+### JSDoc Standards
+
+All functions, components, and modules include detailed JSDoc documentation:
+
+```typescript
+/**
+ * Brief function description
+ * 
+ * Detailed explanation of what the function does, why it exists,
+ * and how it fits into the larger system.
+ * 
+ * @param param1 - Description of parameter
+ * @param param2 - Description of parameter
+ * @returns Description of return value
+ * 
+ * @example
+ * ```typescript
+ * const result = myFunction('example', 123);
+ * ```
+ */
+export function myFunction(param1: string, param2: number): string {
+  // Implementation
+}
+```
+
+### Documentation Coverage
+
+- **Components** - Full JSDoc with props, behavior, examples
+- **Utilities** - Function documentation with parameters and examples  
+- **Data** - Type definitions and validation rules
+- **Types** - Interface and type documentation
+- **Workflows** - Inline comments explaining CI/CD steps
+
+### File Headers
+
+All files include standardized headers:
+
+```typescript
+/**
+ * Brief file description
+ * 
+ * @fileoverview Detailed explanation of file purpose and contents
+ * @author The Winter Shadow
+ * @since 1.0.0
+ */
+```
+
+## �📊 Performance
 
 - Lighthouse Score: 95+ across all metrics
 - First Contentful Paint: < 1.5s

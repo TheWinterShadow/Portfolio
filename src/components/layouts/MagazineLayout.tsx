@@ -42,7 +42,7 @@ export default function MagazineLayout() {
               </motion.div>
               <div className="border-l-4 border-[var(--theme-primary)] pl-6 mb-8">
                 <p className="text-2xl text-[var(--theme-text-secondary)] italic">
-                  "Building secure systems, automating workflows, and bridging the gap between development and security."
+                  &quot;Building secure systems, automating workflows, and bridging the gap between development and security.&quot;
                 </p>
               </div>
             </div>

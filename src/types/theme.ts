@@ -1,5 +1,6 @@
 export type ThemeName = 'cyber' | 'security' | 'tech' | 'blue' | 'green' | 'orange' | 'red' | 'purple';
 export type ColorMode = 'light' | 'dark';
+export type LayoutId = 'security' | 'cyber' | 'tech' | 'minimal' | 'grid' | 'split' | 'timeline' | 'magazine' | 'dashboard' | 'carousel' | 'isometric' | 'fullscreen' | 'cardstack' | 'modern';
 
 export interface Theme {
   name: ThemeName;

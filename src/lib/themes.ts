@@ -1,5 +1,21 @@
+/**
+ * Theme system for The Winter Shadow Portfolio
+ * 
+ * @fileoverview Comprehensive theming system supporting multiple color schemes
+ * and dark/light mode variants. Provides utilities for theme application and management.
+ * @author The Winter Shadow
+ * @since 1.0.0
+ */
+
 import { Theme, ThemeName, ColorMode } from '@/types/theme';
 
+/**
+ * Dark theme configurations
+ * 
+ * Collection of dark mode themes, each representing a different personality
+ * and aesthetic for the portfolio. Themes are applied using CSS custom properties
+ * for dynamic switching without page reloads.
+ */
 export const themes: Record<ThemeName, Theme> = {
   cyber: {
     name: 'cyber',
@@ -230,10 +246,41 @@ export const lightThemes: Record<ThemeName, Theme> = {
   },
 };
 
+/**
+ * Retrieves the appropriate theme based on theme name and color mode
+ * 
+ * Selects between dark and light variants of themes. Acts as the main
+ * interface for theme selection throughout the application.
+ * 
+ * @param themeName - The name of the theme to retrieve
+ * @param colorMode - Whether to use 'dark' or 'light' variant
+ * @returns The complete theme object with color definitions
+ * 
+ * @example
+ * ```typescript
+ * const theme = getTheme('cyber', 'dark');
+ * applyTheme(theme);
+ * ```
+ */
 export function getTheme(themeName: ThemeName, colorMode: ColorMode): Theme {
   return colorMode === 'dark' ? themes[themeName] : lightThemes[themeName];
 }
 
+/**
+ * Applies a theme to the document root by setting CSS custom properties
+ * 
+ * Updates CSS custom properties on the document root element, allowing
+ * for instant theme switching without page reloads. All theme-aware
+ * components use these CSS variables for consistent theming.
+ * 
+ * @param theme - The theme object to apply
+ * 
+ * @example
+ * ```typescript
+ * const cyberTheme = getTheme('cyber', 'dark');
+ * applyTheme(cyberTheme);
+ * ```
+ */
 export function applyTheme(theme: Theme) {
   const root = document.documentElement;
   root.style.setProperty('--theme-bg', theme.colors.bg);

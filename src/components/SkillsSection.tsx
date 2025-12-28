@@ -4,7 +4,8 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { 
   Code, Cloud, Shield, Database, Settings, Network, 
-  Lock, Brain, Server, FileCode, Terminal, Box, Sparkles
+  Lock, Brain, Server, FileCode, Terminal, Box, Sparkles,
+  type LucideIcon
 } from 'lucide-react';
 
 // Technology logo mapping - using Simple Icons CDN (jsDelivr)
@@ -24,6 +25,7 @@ const techLogos: Record<string, string> = {
   'C': 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/c.svg',
   'Java': 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/java.svg',
   'JavaScript': 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/javascript.svg',
+  'NextJS': 'https://cdn.jsdelivr.net/npm/simple-icons@9.21.0/icons/nextdotjs.svg',
   'TypeScript': 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/typescript.svg',
   'HTML5': 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/html5.svg',
   'CSS': 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/css3.svg',
@@ -45,8 +47,7 @@ const techLogos: Record<string, string> = {
   'PostgreSQL': 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/postgresql.svg',
   'MongoDB': 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/mongodb.svg',
   'Spark': 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/apachespark.svg',
-  'Data Lakes': 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/apache.svg',
-  'ETL Pipelines': 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/apacheairflow.svg',
+  'Apache Airflow': 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/apacheairflow.svg',
   
   // IAM & Access Control
   'ABAC': 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/keycloak.svg',
@@ -87,7 +88,7 @@ const techLogos: Record<string, string> = {
 const DefaultIcon = Code;
 
 // Technology icon mapping (fallback)
-const techIcons: Record<string, React.ComponentType<{ className?: string; size?: number }>> = {
+const techIcons: Record<string, LucideIcon> = {
   // Cloud & Infrastructure
   'AWS': Cloud,
   'Microsoft Azure': Cloud,
@@ -103,6 +104,7 @@ const techIcons: Record<string, React.ComponentType<{ className?: string; size?:
   'C': Code,
   'Java': Code,
   'JavaScript': Code,
+  'NextJS': Code,
   'TypeScript': Code,
   'HTML5': Code,
   'CSS': Code,
@@ -124,8 +126,7 @@ const techIcons: Record<string, React.ComponentType<{ className?: string; size?:
   'PostgreSQL': Database,
   'MongoDB': Database,
   'Spark': Database,
-  'Data Lakes': Database,
-  'ETL Pipelines': Database,
+  'Apache Airflow': Database,
   
   // IAM & Access Control
   'ABAC': Lock,

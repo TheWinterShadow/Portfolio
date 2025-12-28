@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { CheckCircle, Users, Zap, Shield, Code as CodeIcon } from 'lucide-react';
+import { CheckCircle, Users, Zap, Shield, Code as CodeIcon, type LucideIcon } from 'lucide-react';
 
 const services = [
   {
@@ -34,7 +34,7 @@ const testimonials = [
   },
 ];
 
-const iconMap: Record<string, React.ComponentType<{ className?: string; size?: number }>> = {
+const iconMap: Record<string, LucideIcon> = {
   Shield,
   Zap,
   Code: CodeIcon,
@@ -93,7 +93,7 @@ export default function FreelanceSection() {
                 className="bg-[var(--theme-surface)] border border-[var(--theme-border)] rounded-lg p-6"
               >
                 <p className="text-[var(--theme-text-secondary)] mb-4 italic">
-                  "{testimonial.quote}"
+                  &quot;{testimonial.quote}&quot;
                 </p>
                 <div className="flex items-center gap-2">
                   <div className="w-10 h-10 bg-[var(--theme-primary)]/20 rounded-full flex items-center justify-center">
@@ -124,7 +124,7 @@ export default function FreelanceSection() {
             Ready to Work Together?
           </h3>
           <p className="text-[var(--theme-text-secondary)] mb-6 max-w-2xl mx-auto">
-            Let's discuss how I can help secure your infrastructure, automate your workflows, or
+            Let&apos;s discuss how I can help secure your infrastructure, automate your workflows, or
             build custom tools for your team.
           </p>
           <motion.a

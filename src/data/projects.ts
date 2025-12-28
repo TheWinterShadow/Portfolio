@@ -1,5 +1,41 @@
-import { Project } from '@/types/project';
+/**
+ * Project portfolio data for The Winter Shadow Portfolio
+ * 
+ * @fileoverview Centralized repository of all portfolio projects with detailed metadata,
+ * links, and categorization. Used throughout the application for project displays.
+ * @author The Winter Shadow
+ * @since 1.0.0
+ */
 
+import { ProjectType, Project } from '@/types/project';
+
+/**
+ * Complete portfolio of projects
+ * 
+ * Comprehensive collection of all projects across different domains including
+ * security, data engineering, web development, infrastructure, and research.
+ * Each project includes detailed metadata for rich presentation and filtering.
+ * 
+ * Project domains:
+ * - Security: IAM scanners, security tools, vulnerability assessment
+ * - Data Engineering: ETL pipelines, data processing, analytics
+ * - Web Development: Frontend applications, frameworks, user interfaces
+ * - Infrastructure: DevOps, automation, deployment tools
+ * - Research: Experimental projects, proof of concepts, studies
+ * - Design: UI/UX, graphics, visual design work
+ * 
+ * @example
+ * ```typescript
+ * // Get all security projects
+ * const securityProjects = projects.filter(p => p.domain === 'Security');
+ * 
+ * // Get featured projects
+ * const featured = projects.filter(p => p.featured);
+ * 
+ * // Find project by ID
+ * const project = projects.find(p => p.id === 'lock-and-key');
+ * ```
+ */
 export const projects: Project[] = [
   {
     id: 'owl-watch',
@@ -120,7 +156,7 @@ export const projects: Project[] = [
     id: 'netsecure',
     title: 'NetSecure',
     domain: 'Design',
-    type: 'Design',
+    type: ['Open Source'] as ProjectType[],
     description: 'Security-focused design concept showcasing modern UI/UX for security applications.',
     techStack: ['Design', 'UI/UX'],
     media: {

@@ -272,7 +272,7 @@ export default function ContactSection() {
                 Availability
               </h3>
               <p className="text-[var(--theme-text-secondary)] mb-4">
-                I'm currently available for:
+                I&apos;m currently available for:
               </p>
               <ul className="space-y-2">
                 {['Security consulting projects', 'Infrastructure automation', 'Custom tool development', 'Open source collaborations'].map(

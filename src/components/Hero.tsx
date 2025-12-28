@@ -1,3 +1,12 @@
+/**
+ * Hero Section Component for The Winter Shadow Portfolio
+ * 
+ * @fileoverview Main landing section featuring animated introduction, rotating taglines,
+ * and call-to-action buttons. Includes smooth animations and responsive design.
+ * @author The Winter Shadow
+ * @since 1.0.0
+ */
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -5,15 +14,58 @@ import { motion } from 'framer-motion';
 import { ChevronDown, Code, Shield, Server } from 'lucide-react';
 import Link from 'next/link';
 
+/**
+ * Rotating taglines displayed in the hero section
+ * These taglines highlight different aspects of the developer's expertise
+ */
 const taglines = [
   'Building secure systems',
   'Automating security workflows',
   'Bridging dev & security',
 ];
 
+/**
+ * Hero Component
+ * 
+ * The main landing section that serves as the first impression for visitors.
+ * Features animated text, rotating taglines, call-to-action buttons, and
+ * expertise icons with smooth transitions.
+ * 
+ * Key Features:
+ * - Rotating taglines with 3-second intervals
+ * - Smooth fade-in animations with staggered delays
+ * - Responsive design for mobile and desktop
+ * - Interactive buttons with hover and tap animations
+ * - Background gradient animation for visual appeal
+ * - Expertise icons representing core skills
+ * 
+ * @returns {JSX.Element} The rendered Hero section
+ * 
+ * @example
+ * ```tsx
+ * import Hero from '@/components/Hero';
+ * 
+ * export default function HomePage() {
+ *   return (
+ *     <main>
+ *       <Hero />
+ *     </main>
+ *   );
+ * }
+ * ```
+ */
 export default function Hero() {
+  /**
+   * Current tagline index for rotation
+   * Cycles through the taglines array every 3 seconds
+   */
   const [currentTagline, setCurrentTagline] = useState(0);
 
+  /**
+   * Effect to handle automatic tagline rotation
+   * Sets up an interval that cycles through taglines every 3 seconds
+   * Cleans up interval on component unmount to prevent memory leaks
+   */
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTagline((prev) => (prev + 1) % taglines.length);
