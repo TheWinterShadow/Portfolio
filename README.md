@@ -376,6 +376,21 @@ The project uses static export for GitHub Pages compatibility. Configuration is 
 
 Custom theme colors and animations are defined in `tailwind.config.js`. The theme system uses CSS variables for dynamic theming.
 
+## 🐛 Troubleshooting
+
+### Build Issues
+
+**Fonts not loading during build:**
+The project uses Google Fonts loaded via HTML `<link>` tags instead of `next/font/google` for better offline build compatibility. This ensures builds complete successfully even in restricted network environments.
+
+**404 errors on GitHub Pages:**
+- Ensure `.nojekyll` file is present in the `public` directory (it will be copied to `out` during build)
+- Verify `basePath` and `assetPrefix` in `next.config.js` match your repository name
+- Check that GitHub Pages is configured to deploy from GitHub Actions
+
+**Build fails with network errors:**
+If you see errors about downloading stylesheets or fonts, this is expected in restricted environments. The build will complete successfully and fonts will load at runtime in the browser.
+
 ## 📄 License
 
 MIT License - see [LICENSE](LICENSE) file for details.
