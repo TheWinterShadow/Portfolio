@@ -12,13 +12,13 @@ import EasterEggs from '@/components/EasterEggs';
 // CSS variables with fallback font stacks are defined in globals.css
 
 export const metadata: Metadata = {
-  title: 'The Winter Shadow | Security Engineer & Developer',
-  description: 'Portfolio of Elijah Winter - Security Engineer, Developer, and IT Professional. Showcasing projects in security, data engineering, and web development.',
-  keywords: ['security engineer', 'developer', 'portfolio', 'AWS', 'cybersecurity', 'data engineering'],
+  title: 'Elijah Winter | Enterprise-Grade Security Engineering for Growing Companies',
+  description: 'Former Amazon & CIA security leader. Security audits, IAM architecture, AI/ML security, and incident response for startups and mid-market companies. Starting at $5,000.',
+  keywords: ['security consultant', 'security engineer', 'Amazon security', 'CIA security', 'AI security', 'IAM architecture', 'incident response', 'SOC 2 compliance', 'security audit', 'cybersecurity consultant', 'enterprise security', 'startup security'],
   authors: [{ name: 'Elijah Winter' }],
   openGraph: {
-    title: 'The Winter Shadow | Security Engineer & Developer',
-    description: 'Portfolio of Elijah Winter - Security Engineer, Developer, and IT Professional',
+    title: 'Elijah Winter | Enterprise-Grade Security Engineering for Growing Companies',
+    description: 'Former Amazon & CIA security leader bringing battle-tested frameworks to companies that need them most.',
     type: 'website',
   },
 };
