@@ -24,7 +24,7 @@ export default function ContactPage() {
             Get In Touch
           </h1>
           <p className="text-lg text-[var(--theme-text-secondary)] max-w-2xl mx-auto">
-            Have a project in mind? Want to collaborate? Or just want to say hello? I&apos;d love to hear from you.
+            Have a project in mind? Want to collaborate? Or just want to say hello? I&apos;d love to hear from you!
           </p>
         </motion.div>
 
