@@ -1,9 +1,29 @@
+/**
+ * ThemeProvider Component - Theme Context Provider
+ *
+ * @fileoverview Provides theme management context for the application.
+ * Handles theme selection, color mode toggling, and persistence via localStorage.
+ *
+ * @description This provider manages:
+ * - Current theme name (cyber, security, tech, etc.)
+ * - Color mode (light/dark)
+ * - Theme persistence across sessions
+ * - CSS custom property application
+ * - HTML class management for dark mode
+ *
+ * @author The Winter Shadow
+ * @since 1.0.0
+ */
+
 'use client';
 
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { ThemeName, ColorMode } from '@/types/theme';
 import { getTheme, applyTheme } from '@/lib/themes';
 
+/**
+ * Shape of the theme context value
+ */
 interface ThemeContextType {
   themeName: ThemeName;
   colorMode: ColorMode;
@@ -11,8 +31,35 @@ interface ThemeContextType {
   toggleColorMode: () => void;
 }
 
+/**
+ * Theme context for accessing theme state throughout the app
+ */
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
+/**
+ * ThemeProvider Component
+ *
+ * Provides theme context to the component tree with:
+ * - Theme name state (persisted to localStorage)
+ * - Color mode state (light/dark, persisted to localStorage)
+ * - Automatic theme application on mount and changes
+ * - Graceful handling of localStorage errors (SSR, private browsing)
+ *
+ * @param props - Component props
+ * @param props.children - Child components that can access theme context
+ * @returns Provider component wrapping children
+ *
+ * @example
+ * ```tsx
+ * // In your layout
+ * <ThemeProvider>
+ *   {children}
+ * </ThemeProvider>
+ *
+ * // In any child component
+ * const { themeName, setThemeName, colorMode, toggleColorMode } = useTheme();
+ * ```
+ */
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [themeName, setThemeNameState] = useState<ThemeName>('security');
   const [colorMode, setColorMode] = useState<ColorMode>('dark');
@@ -67,6 +114,23 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   );
 }
 
+/**
+ * Custom hook to access theme context
+ *
+ * Provides access to:
+ * - themeName: Current theme name
+ * - colorMode: Current color mode (light/dark)
+ * - setThemeName: Function to change the theme
+ * - toggleColorMode: Function to toggle light/dark mode
+ *
+ * @returns Theme context value
+ * @throws Error if used outside of ThemeProvider
+ *
+ * @example
+ * ```tsx
+ * const { themeName, toggleColorMode } = useTheme();
+ * ```
+ */
 export function useTheme() {
   const context = useContext(ThemeContext);
   if (context === undefined) {

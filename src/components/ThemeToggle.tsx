@@ -1,3 +1,18 @@
+/**
+ * ThemeToggle Component - Theme and Color Mode Controls
+ *
+ * @fileoverview A floating control panel for changing themes and toggling dark mode.
+ * Provides fixed-position buttons for quick theme customization.
+ *
+ * @description Renders:
+ * - Color mode toggle button (sun/moon icon)
+ * - Theme selector button (palette icon)
+ * - Animated dropdown with theme options
+ *
+ * @author The Winter Shadow
+ * @since 1.0.0
+ */
+
 'use client';
 
 import { Moon, Sun, Palette } from 'lucide-react';
@@ -6,6 +21,9 @@ import { ThemeName } from '@/types/theme';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 
+/**
+ * Available theme options with display names
+ */
 const themes: { name: ThemeName; label: string }[] = [
   { name: 'cyber', label: 'Cyber Command Center' },
   { name: 'security', label: 'Security Professional' },
@@ -17,6 +35,23 @@ const themes: { name: ThemeName; label: string }[] = [
   { name: 'purple', label: 'Royal Purple' },
 ];
 
+/**
+ * ThemeToggle Component
+ *
+ * Provides theme customization controls with:
+ * - Fixed top-right positioning
+ * - Animated toggle buttons
+ * - Dropdown theme selector with all available themes
+ * - Color mode toggle (light/dark)
+ *
+ * @returns The theme toggle controls JSX
+ *
+ * @example
+ * ```tsx
+ * // Typically included in the root layout
+ * <ThemeToggle />
+ * ```
+ */
 export default function ThemeToggle() {
   const { themeName, colorMode, setThemeName, toggleColorMode } = useTheme();
   const [showThemeSelector, setShowThemeSelector] = useState(false);

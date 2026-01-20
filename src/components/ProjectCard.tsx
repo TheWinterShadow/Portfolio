@@ -1,3 +1,21 @@
+/**
+ * ProjectCard Component - Project Display Card
+ *
+ * @fileoverview A card component for displaying project information in a grid layout.
+ * Features hover animations, thumbnail display, and quick action links.
+ *
+ * @description Renders a project card with:
+ * - Thumbnail or animated placeholder
+ * - Project title, domain, and type badges
+ * - Truncated description
+ * - Tech stack preview
+ * - Stats (stars, contributors, downloads)
+ * - Quick links (GitHub, live demo)
+ *
+ * @author The Winter Shadow
+ * @since 1.0.0
+ */
+
 'use client';
 
 import { motion } from 'framer-motion';
@@ -5,11 +23,39 @@ import { Project } from '@/types/project';
 import { Github, ExternalLink, Star, Users, Download } from 'lucide-react';
 import { useState } from 'react';
 
+/**
+ * Props for the ProjectCard component
+ */
 interface ProjectCardProps {
   project: Project;
   onClick: () => void;
 }
 
+/**
+ * ProjectCard Component
+ *
+ * Displays a project in a card format with:
+ * - Animated hover effects (lift and scale)
+ * - Dynamic thumbnail or placeholder
+ * - Project metadata badges
+ * - Truncated description with overflow handling
+ * - Tech stack tags (limited to 4 with overflow count)
+ * - Stats display (stars, contributors, downloads)
+ * - Quick action links that don't trigger card click
+ *
+ * @param props - Component props
+ * @param props.project - The project data to display
+ * @param props.onClick - Handler called when card is clicked (opens modal)
+ * @returns The project card JSX
+ *
+ * @example
+ * ```tsx
+ * <ProjectCard
+ *   project={myProject}
+ *   onClick={() => setSelectedProject(myProject)}
+ * />
+ * ```
+ */
 export default function ProjectCard({ project, onClick }: ProjectCardProps) {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -17,14 +63,15 @@ export default function ProjectCard({ project, onClick }: ProjectCardProps) {
 
   return (
     <motion.div
+      id={`project-${project.id}`}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      whileHover={{ y: -5 }}
+      whileHover={{ y: -8, scale: 1.02 }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
       onClick={onClick}
-      className="cursor-pointer bg-[var(--theme-surface)] border border-[var(--theme-border)] rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all"
+      className="cursor-pointer bg-[var(--theme-surface)] border border-[var(--theme-border)] rounded-lg overflow-hidden shadow-lg hover:shadow-2xl hover:border-[var(--theme-primary)] transition-all group"
     >
       {/* Thumbnail */}
       {project.media?.thumbnail ? (
@@ -37,11 +84,33 @@ export default function ProjectCard({ project, onClick }: ProjectCardProps) {
           <div className="absolute inset-0 bg-gradient-to-t from-[var(--theme-surface)] to-transparent" />
         </div>
       ) : (
-        <div className="h-48 bg-gradient-to-br from-[var(--theme-primary)]/20 to-[var(--theme-secondary)]/20 flex items-center justify-center">
-          <span className="text-4xl font-bold text-[var(--theme-primary)] opacity-50">
+        <motion.div 
+          className="h-48 bg-gradient-to-br from-[var(--theme-primary)]/20 to-[var(--theme-secondary)]/20 flex items-center justify-center relative overflow-hidden"
+          animate={isHovered ? {
+            background: [
+              'linear-gradient(135deg, var(--theme-primary)/20, var(--theme-secondary)/20)',
+              'linear-gradient(135deg, var(--theme-primary)/30, var(--theme-secondary)/30)',
+              'linear-gradient(135deg, var(--theme-primary)/20, var(--theme-secondary)/20)',
+            ],
+          } : {}}
+          transition={{ duration: 2, repeat: isHovered ? Infinity : 0 }}
+        >
+          <motion.span 
+            className="text-4xl font-bold text-[var(--theme-primary)] opacity-50 z-10"
+            animate={isHovered ? { scale: [1, 1.2, 1], rotate: [0, 5, -5, 0] } : {}}
+            transition={{ duration: 0.5 }}
+          >
             {project.title.charAt(0)}
-          </span>
-        </div>
+          </motion.span>
+          {isHovered && (
+            <motion.div
+              className="absolute inset-0 bg-[var(--theme-primary)]/10"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [0, 0.3, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            />
+          )}
+        </motion.div>
       )}
 
       <div className="p-4">

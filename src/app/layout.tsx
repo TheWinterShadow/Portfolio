@@ -1,28 +1,60 @@
+/**
+ * Root Layout - Application Shell
+ *
+ * @fileoverview The root layout component that wraps all pages in the application.
+ * Provides the base HTML structure, global styles, theme context, and persistent UI elements.
+ *
+ * @description This layout establishes the application shell including:
+ * - HTML document structure with language and hydration settings
+ * - Google Fonts preconnection and loading (Inter and JetBrains Mono)
+ * - Theme provider for dynamic theming support
+ * - Persistent UI controls (ThemeToggle and CLIToggle)
+ *
+ * @author The Winter Shadow
+ * @since 1.0.0
+ */
+
 import type { Metadata } from 'next';
 import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
-import { LayoutProvider } from '@/lib/layout-context';
-import BottomNavigation from '@/components/BottomNavigation';
-import LeftContactButtons from '@/components/LeftContactButtons';
 import ThemeToggle from '@/components/ThemeToggle';
-import EasterEggs from '@/components/EasterEggs';
+import CLIToggle from '@/components/CLIToggle';
 
-// Fonts are loaded via HTML link tags in the head element for better offline build compatibility
-// This allows the build to complete without network access to Google Fonts
-// CSS variables with fallback font stacks are defined in globals.css
-
+/**
+ * Page metadata for SEO and social sharing
+ * Configures title, description, keywords, and OpenGraph data
+ */
 export const metadata: Metadata = {
-  title: 'The Winter Shadow | Security Engineer & Developer',
-  description: 'Portfolio of Elijah Winter - Security Engineer, Developer, and IT Professional. Showcasing projects in security, data engineering, and web development.',
-  keywords: ['security engineer', 'developer', 'portfolio', 'AWS', 'cybersecurity', 'data engineering'],
+  title: 'Project Showcase | The Winter Shadow',
+  description: 'Interactive showcase of projects spanning security, data engineering, web development, and more. Explore via web interface or CLI mode.',
+  keywords: ['projects', 'portfolio', 'showcase', 'security', 'data engineering', 'web development'],
   authors: [{ name: 'Elijah Winter' }],
   openGraph: {
-    title: 'The Winter Shadow | Security Engineer & Developer',
-    description: 'Portfolio of Elijah Winter - Security Engineer, Developer, and IT Professional',
+    title: 'Project Showcase | The Winter Shadow',
+    description: 'Interactive showcase of projects spanning security, data engineering, web development, and more',
     type: 'website',
   },
 };
 
+/**
+ * RootLayout Component
+ *
+ * Provides the application shell for all pages, including:
+ * - HTML document structure
+ * - Font loading configuration
+ * - Theme context provider
+ * - Persistent floating UI controls
+ *
+ * @param props - Component props
+ * @param props.children - Child page content to render within the layout
+ * @returns The complete HTML document structure
+ *
+ * @example
+ * ```tsx
+ * // Automatically wraps all pages in the app
+ * // Access via any route in the application
+ * ```
+ */
 export default function RootLayout({
   children,
 }: {
@@ -37,13 +69,9 @@ export default function RootLayout({
       </head>
       <body className="font-sans antialiased">
         <ThemeProvider>
-          <LayoutProvider>
-            <EasterEggs />
-            <LeftContactButtons />
-            <BottomNavigation />
-            {children}
-            <ThemeToggle />
-          </LayoutProvider>
+          {children}
+          <ThemeToggle />
+          <CLIToggle />
         </ThemeProvider>
       </body>
     </html>

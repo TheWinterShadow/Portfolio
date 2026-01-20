@@ -1,3 +1,21 @@
+/**
+ * ProjectModal Component - Detailed Project View Modal
+ *
+ * @fileoverview A full-screen modal for displaying comprehensive project details.
+ * Includes description, features, tech stack, screenshots, stats, and links.
+ *
+ * @description Renders a modal overlay with:
+ * - Animated entrance/exit transitions
+ * - Complete project information
+ * - Screenshot gallery
+ * - Project statistics
+ * - External link buttons (GitHub, docs, PyPI, etc.)
+ * - Body scroll locking when open
+ *
+ * @author The Winter Shadow
+ * @since 1.0.0
+ */
+
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
@@ -5,11 +23,42 @@ import { Project } from '@/types/project';
 import { X, Github, ExternalLink, BookOpen, FileText, Package } from 'lucide-react';
 import { useEffect } from 'react';
 
+/**
+ * Props for the ProjectModal component
+ */
 interface ProjectModalProps {
   project: Project | null;
   onClose: () => void;
 }
 
+/**
+ * ProjectModal Component
+ *
+ * Displays a detailed view of a project with:
+ * - Animated modal with backdrop blur
+ * - Complete project description
+ * - Feature list with bullet points
+ * - Full tech stack display
+ * - Screenshot gallery (if available)
+ * - Project statistics (stars, forks, contributors, downloads)
+ * - Action buttons for external links
+ *
+ * Handles body scroll locking when modal is open to prevent
+ * background scrolling on the main page.
+ *
+ * @param props - Component props
+ * @param props.project - The project to display (null to hide modal)
+ * @param props.onClose - Handler called when modal should close
+ * @returns The modal JSX or null when no project is selected
+ *
+ * @example
+ * ```tsx
+ * <ProjectModal
+ *   project={selectedProject}
+ *   onClose={() => setSelectedProject(null)}
+ * />
+ * ```
+ */
 export default function ProjectModal({ project, onClose }: ProjectModalProps) {
   useEffect(() => {
     if (project) {

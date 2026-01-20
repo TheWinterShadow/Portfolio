@@ -1,29 +1,42 @@
+/**
+ * Projects Page - Redirect Handler
+ *
+ * @fileoverview A redirect page that forwards users from /projects to the home page.
+ * All projects are displayed on the main page, so this route simply redirects.
+ *
+ * @description This page exists to handle legacy routes or direct navigation to /projects.
+ * It immediately redirects to the home page where the full project showcase is displayed.
+ *
+ * @author The Winter Shadow
+ * @since 1.0.0
+ */
+
 'use client';
 
-import { motion } from 'framer-motion';
-import ProjectsSection from '@/components/ProjectsSection';
-import SkillsSection from '@/components/SkillsSection';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
+/**
+ * ProjectsPage Component
+ *
+ * Handles the /projects route by redirecting to the home page.
+ * Uses client-side navigation for a smooth redirect experience.
+ *
+ * @returns null - Renders nothing as it immediately redirects
+ *
+ * @example
+ * ```tsx
+ * // Automatically handles /projects route
+ * // Redirects to '/' on mount
+ * ```
+ */
 export default function ProjectsPage() {
-  return (
-    <div className="min-h-screen pb-20" style={{ backgroundColor: 'var(--theme-bg)' }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-12"
-        >
-          <h1 className="text-4xl md:text-5xl font-bold text-[var(--theme-text)] mb-4">
-            Projects
-          </h1>
-          <p className="text-lg text-[var(--theme-text-secondary)] max-w-2xl">
-            A collection of my technical work spanning security engineering, data pipelines,
-            web development, and infrastructure automation.
-          </p>
-        </motion.div>
-      </div>
-      <ProjectsSection />
-    </div>
-  );
-}
+  const router = useRouter();
 
+  useEffect(() => {
+    // Redirect to home since all projects are shown there
+    router.push('/');
+  }, [router]);
+
+  return null;
+}

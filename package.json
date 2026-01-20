@@ -1,13 +1,14 @@
 {
     "name": "thewintershadow-portfolio",
     "version": "1.0.0",
-    "description": "Professional portfolio website for The Winter Shadow",
+    "description": "Professional portfolio website for The Winter Shadow - Interactive project showcase with CLI mode, theming, and filtering",
     "private": true,
     "scripts": {
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
         "lint": "next lint",
+        "lint:fix": "next lint --fix",
         "export": "next build",
         "test": "jest",
         "test:watch": "jest --watch",
@@ -15,7 +16,10 @@
         "test:ci": "jest --ci --coverage --watchAll=false",
         "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand --no-cache",
         "type-check": "tsc --noEmit",
-        "pre-push": "npm run test:coverage && npm run type-check && npm run lint && npm run build"
+        "validate": "npm run type-check && npm run lint && npm run test:ci",
+        "pre-commit": "npm run type-check && npm run lint && npm run test:ci",
+        "pre-push": "npm run validate && npm run build",
+        "prepare": "echo 'Run: pip install pre-commit && pre-commit install' || true"
     },
     "dependencies": {
         "next": "^14.2.0",

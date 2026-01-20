@@ -1,0 +1,100 @@
+# Pre-commit Configuration for The Winter Shadow Portfolio
+#
+# This configuration runs automated checks before each commit to ensure
+# code quality, type safety, and successful builds.
+#
+# Installation:
+#   pip install pre-commit
+#   pre-commit install
+#
+# Manual run:
+#   pre-commit run --all-files
+#
+# Skip hooks (emergency only):
+#   git commit --no-verify
+#
+# @author The Winter Shadow
+# @since 1.0.0
+
+# Configuration version
+default_stages: [commit]
+fail_fast: false
+
+repos:
+  # Local hooks for project-specific checks
+  - repo: local
+    hooks:
+      # TypeScript Type Checking
+      - id: type-check
+        name: TypeScript Type Check
+        entry: npm run type-check
+        language: system
+        types: [typescript, tsx]
+        pass_filenames: false
+        description: "Runs TypeScript compiler to check for type errors"
+
+      # ESLint
+      - id: lint
+        name: ESLint
+        entry: npm run lint
+        language: system
+        types: [typescript, tsx, javascript, jsx]
+        pass_filenames: false
+        description: "Runs ESLint to check for code quality issues"
+
+      # Jest Tests
+      - id: test
+        name: Jest Tests
+        entry: npm run test:ci
+        language: system
+        pass_filenames: false
+        stages: [commit]
+        description: "Runs Jest test suite with coverage"
+
+      # Next.js Build Check
+      - id: build
+        name: Next.js Build
+        entry: npm run build
+        language: system
+        pass_filenames: false
+        stages: [push]
+        description: "Runs Next.js production build to verify no build errors"
+
+  # Standard pre-commit hooks for general file checks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      # Prevent large files from being committed
+      - id: check-added-large-files
+        args: ['--maxkb=1000']
+        description: "Prevents committing files larger than 1MB"
+
+      # Check for merge conflict markers
+      - id: check-merge-conflict
+        description: "Checks for unresolved merge conflict markers"
+
+      # Ensure files end with newline
+      - id: end-of-file-fixer
+        exclude: '\.min\.(js|css)$'
+        description: "Ensures files end with a newline"
+
+      # Remove trailing whitespace
+      - id: trailing-whitespace
+        exclude: '\.min\.(js|css)$'
+        description: "Removes trailing whitespace from files"
+
+      # Check JSON syntax
+      - id: check-json
+        description: "Validates JSON file syntax"
+
+      # Check YAML syntax
+      - id: check-yaml
+        description: "Validates YAML file syntax"
+
+      # Detect private keys
+      - id: detect-private-key
+        description: "Detects accidentally committed private keys"
+
+      # Check for case conflicts (important for cross-platform)
+      - id: check-case-conflict
+        description: "Checks for files with names that would conflict on case-insensitive filesystems"
