@@ -137,7 +137,7 @@ const COMMANDS = {
         return <div className="text-red-400">Usage: search &lt;query&gt;</div>;
       }
       const query = args.join(' ').toLowerCase();
-      const filtered = projects.filter(p => 
+      const filtered = projects.filter(p =>
         p.title.toLowerCase().includes(query) ||
         p.description.toLowerCase().includes(query) ||
         p.techStack.some(tech => tech.toLowerCase().includes(query))
@@ -210,9 +210,9 @@ function ProjectDetails({ project }: { project: Project }) {
       {project.links.github && (
         <div>
           <div className="text-[var(--theme-accent)] font-semibold mb-1">Links:</div>
-          <a 
-            href={project.links.github} 
-            target="_blank" 
+          <a
+            href={project.links.github}
+            target="_blank"
             rel="noopener noreferrer"
             className="text-[var(--theme-primary)] hover:underline ml-4"
           >
@@ -493,4 +493,3 @@ export default function CLI({ isOpen, onClose, onNavigateToProject }: CLIProps) 
     </AnimatePresence>
   );
 }
-

@@ -1,6 +1,6 @@
 /**
  * Project portfolio data for The Winter Shadow Portfolio
- * 
+ *
  * @fileoverview Centralized repository of all portfolio projects with detailed metadata,
  * links, and categorization. Used throughout the application for project displays.
  * @author The Winter Shadow
@@ -12,7 +12,7 @@ import { ProjectType, Project, ProjectDomain } from '@/types/project';
 /**
  * Helper function to create a project with sensible defaults
  * Makes it easy to add new projects with minimal boilerplate
- * 
+ *
  * @example
  * ```typescript
  * createProject({
@@ -84,11 +84,11 @@ function createProject({
 
 /**
  * Complete portfolio of projects
- * 
+ *
  * Comprehensive collection of all projects across different domains including
  * security, data engineering, web development, infrastructure, and research.
  * Each project includes detailed metadata for rich presentation and filtering.
- * 
+ *
  * Project domains:
  * - Security: IAM scanners, security tools, vulnerability assessment
  * - Data Engineering: ETL pipelines, data processing, analytics
@@ -96,15 +96,15 @@ function createProject({
  * - Infrastructure: DevOps, automation, deployment tools
  * - Research: Experimental projects, proof of concepts, studies
  * - Design: UI/UX, graphics, visual design work
- * 
+ *
  * @example
  * ```typescript
  * // Get all security projects
  * const securityProjects = projects.filter(p => p.domain === 'Security');
- * 
+ *
  * // Get featured projects
  * const featured = projects.filter(p => p.featured);
- * 
+ *
  * // Find project by ID
  * const project = projects.find(p => p.id === 'lock-and-key');
  * ```
@@ -215,4 +215,3 @@ export const projects: Project[] = [
     },
   }),
 ];
-

@@ -84,7 +84,7 @@ export default function ProjectCard({ project, onClick }: ProjectCardProps) {
           <div className="absolute inset-0 bg-gradient-to-t from-[var(--theme-surface)] to-transparent" />
         </div>
       ) : (
-        <motion.div 
+        <motion.div
           className="h-48 bg-gradient-to-br from-[var(--theme-primary)]/20 to-[var(--theme-secondary)]/20 flex items-center justify-center relative overflow-hidden"
           animate={isHovered ? {
             background: [
@@ -95,7 +95,7 @@ export default function ProjectCard({ project, onClick }: ProjectCardProps) {
           } : {}}
           transition={{ duration: 2, repeat: isHovered ? Infinity : 0 }}
         >
-          <motion.span 
+          <motion.span
             className="text-4xl font-bold text-[var(--theme-primary)] opacity-50 z-10"
             animate={isHovered ? { scale: [1, 1.2, 1], rotate: [0, 5, -5, 0] } : {}}
             transition={{ duration: 0.5 }}
@@ -216,4 +216,3 @@ export default function ProjectCard({ project, onClick }: ProjectCardProps) {
     </motion.div>
   );
 }
-

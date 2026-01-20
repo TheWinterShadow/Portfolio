@@ -6,7 +6,7 @@
   /* Font families - fallback to system fonts if Google Fonts don't load */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace;
-  
+
   --theme-bg: #1a1a2e;
   --theme-surface: #16213e;
   --theme-primary: #16d9e3;
@@ -99,7 +99,7 @@ body {
 
 /* Cyber Theme Effects */
 .cyber-grid {
-  background-image: 
+  background-image:
     linear-gradient(var(--theme-primary) 1px, transparent 1px),
     linear-gradient(90deg, var(--theme-primary) 1px, transparent 1px);
   background-size: 50px 50px;
@@ -181,4 +181,3 @@ body {
   will-change: opacity;
   transform: translateZ(0);
 }
-

@@ -69,11 +69,11 @@ export default function ContactBubbles({
     }
   };
 
-  const containerClass = variant === 'horizontal' 
-    ? 'flex items-center gap-2' 
+  const containerClass = variant === 'horizontal'
+    ? 'flex items-center gap-2'
     : 'flex flex-col items-center gap-3';
 
-  const linkClass = showLabels 
+  const linkClass = showLabels
     ? 'flex items-center gap-2 p-2 hover:bg-[var(--theme-surface)] rounded-lg transition-colors group'
     : 'p-2 hover:bg-[var(--theme-surface)] rounded-lg transition-colors group';
 

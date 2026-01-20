@@ -75,12 +75,11 @@ export default function CLIToggle() {
       >
         <Terminal size={24} />
       </motion.button>
-      <CLI 
-        isOpen={cliOpen} 
+      <CLI
+        isOpen={cliOpen}
         onClose={() => setCliOpen(false)}
         onNavigateToProject={handleNavigateToProject}
       />
     </>
   );
 }
-

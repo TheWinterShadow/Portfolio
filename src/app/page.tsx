@@ -216,7 +216,7 @@ export default function Home() {
             <p className="text-sm text-[var(--theme-text-secondary)] mb-6">
               Navigate projects through terminal commands
             </p>
-            
+
             {/* Contact Bubbles */}
             <motion.div
               initial={{ opacity: 0 }}
@@ -428,8 +428,8 @@ export default function Home() {
       </section>
 
       {/* CLI Component */}
-      <CLI 
-        isOpen={cliOpen} 
+      <CLI
+        isOpen={cliOpen}
         onClose={() => setCliOpen(false)}
         onNavigateToProject={handleNavigateToProject}
       />

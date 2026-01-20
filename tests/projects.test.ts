@@ -1,6 +1,6 @@
 /**
  * Unit tests for projects data
- * 
+ *
  * @fileoverview Test suite for project portfolio data validation,
  * ensuring data integrity and consistency across all project entries
  * @author The Winter Shadow
@@ -73,7 +73,7 @@ describe('Projects Data', () => {
 
     const validTypes = [
       'Open Source',
-      'Research', 
+      'Research',
       'Design',
       'Professional',
       'Personal',
@@ -219,7 +219,7 @@ describe('Projects Data', () => {
         expect(project.longDescription).toBeTruthy();
         expect(project.features).toBeTruthy();
         expect(project.features!.length).toBeGreaterThan(2);
-        
+
         // Should have GitHub link at minimum
         expect(project.links.github).toBeTruthy();
       });

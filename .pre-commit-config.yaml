@@ -17,7 +17,7 @@
 # @since 1.0.0
 
 # Configuration version
-default_stages: [commit]
+default_stages: [pre-commit]
 fail_fast: false
 
 repos:
@@ -29,7 +29,7 @@ repos:
         name: TypeScript Type Check
         entry: npm run type-check
         language: system
-        types: [typescript, tsx]
+        types_or: [ts, tsx]
         pass_filenames: false
         description: "Runs TypeScript compiler to check for type errors"
 
@@ -38,7 +38,7 @@ repos:
         name: ESLint
         entry: npm run lint
         language: system
-        types: [typescript, tsx, javascript, jsx]
+        types_or: [ts, tsx, javascript]
         pass_filenames: false
         description: "Runs ESLint to check for code quality issues"
 
@@ -48,7 +48,7 @@ repos:
         entry: npm run test:ci
         language: system
         pass_filenames: false
-        stages: [commit]
+        stages: [pre-commit]
         description: "Runs Jest test suite with coverage"
 
       # Next.js Build Check
@@ -57,7 +57,7 @@ repos:
         entry: npm run build
         language: system
         pass_filenames: false
-        stages: [push]
+        stages: [pre-push]
         description: "Runs Next.js production build to verify no build errors"
 
   # Standard pre-commit hooks for general file checks

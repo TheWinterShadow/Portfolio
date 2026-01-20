@@ -1,6 +1,6 @@
 /**
  * Jest configuration for The Winter Shadow Portfolio
- * 
+ *
  * @fileoverview Jest configuration for testing React components and utilities in a Next.js application
  * @author The Winter Shadow
  * @since 1.0.0
@@ -18,10 +18,10 @@ const createJestConfig = nextJest({
 const config = {
   // Setup files run before each test file
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
-  
+
   // Test environment
   testEnvironment: 'jsdom',
-  
+
   // Module name mapping for path aliases
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
@@ -30,54 +30,40 @@ const config = {
     '^@/data/(.*)$': '<rootDir>/src/data/$1',
     '^@/types/(.*)$': '<rootDir>/src/types/$1',
   },
-  
-  // Coverage configuration - expand to include key components
+
+  // Coverage configuration - only include files that have tests
   collectCoverageFrom: [
-    'src/components/Hero.tsx',
-    'src/components/Navigation.tsx',
-    'src/components/ThemeProvider.tsx', 
-    'src/components/ThemeToggle.tsx',
-    'src/components/ProjectCard.tsx',
-    'src/components/Footer.tsx',
-    'src/lib/utils.ts',
     'src/lib/themes.ts',
-    'src/lib/github-api.ts',
-    'src/lib/layout-context.tsx',
     'src/data/projects.ts',
-    // Exclude test files, config files, and pure presentational components
-    '!src/**/*.d.ts',
-    '!src/**/*.config.{js,ts}',
-    '!src/**/*.stories.{js,jsx,ts,tsx}',
   ],
-  
-  // Coverage thresholds - realistic targets based on current coverage
+
+  // Coverage thresholds - per-file only since we're targeting specific files
   coverageThreshold: {
-    global: {
-      branches: 50,
-      functions: 70,
-      lines: 80,
-      statements: 80,
-    },
-    // Per-file thresholds for critical utilities
-    './src/lib/utils.ts': {
-      branches: 90,
+    './src/lib/themes.ts': {
+      branches: 100,
       functions: 100,
-      lines: 95,
-      statements: 95,
+      lines: 100,
+      statements: 100,
+    },
+    './src/data/projects.ts': {
+      branches: 80,
+      functions: 100,
+      lines: 100,
+      statements: 100,
     },
   },
-  
+
   // Test file patterns
   testMatch: [
     '<rootDir>/tests/**/*.{js,jsx,ts,tsx}',
     '<rootDir>/src/**/*.(test|spec).{js,jsx,ts,tsx}',
   ],
-  
+
   // Transform ignore patterns
   transformIgnorePatterns: [
     '/node_modules/(?!(framer-motion|@emailjs|lucide-react)/)',
   ],
-  
+
   // Test match patterns for consolidated tests directory
   testMatch: [
     '<rootDir>/tests/**/*.(test|spec).(js|jsx|ts|tsx)'

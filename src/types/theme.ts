@@ -57,4 +57,3 @@ export interface Theme {
     border: string;
   };
 }
-

@@ -56,7 +56,7 @@ jobs:
                   node -e "
                     const fs = require('fs');
                     console.log('Checking project structure...');
-                    
+
                     // Check key directories exist
                     const dirs = ['src/components', 'src/app', 'src/data', 'src/lib'];
                     dirs.forEach(dir => {

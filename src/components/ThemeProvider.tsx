@@ -70,7 +70,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     try {
       const savedTheme = localStorage?.getItem('theme') as ThemeName | null;
       const savedColorMode = localStorage?.getItem('colorMode') as ColorMode | null;
-      
+
       if (savedTheme) setThemeNameState(savedTheme);
       if (savedColorMode) setColorMode(savedColorMode);
     } catch (error) {
@@ -138,4 +138,3 @@ export function useTheme() {
   }
   return context;
 }
-

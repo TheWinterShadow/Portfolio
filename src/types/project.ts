@@ -108,4 +108,3 @@ export interface Project {
   /** Whether to highlight in featured section */
   featured?: boolean;
 }
-
