@@ -269,19 +269,22 @@ export default function CLI({ isOpen, onClose, onNavigateToProject }: CLIProps) 
 
   useEffect(() => {
     if (isOpen) {
-      setCommandHistory([{
-        command: 'welcome',
-        output: (
-          <div className="space-y-2">
-            <div className="text-[var(--theme-primary)] font-bold text-lg">Welcome to Project CLI!</div>
-            <div className="text-[var(--theme-text-secondary)]">
-              Navigate my projects using terminal commands. Type <span className="text-[var(--theme-accent)]">help</span> to get started.
+      const timer = setTimeout(() => {
+        setCommandHistory([{
+          command: 'welcome',
+          output: (
+            <div className="space-y-2">
+              <div className="text-[var(--theme-primary)] font-bold text-lg">Welcome to Project CLI!</div>
+              <div className="text-[var(--theme-text-secondary)]">
+                Navigate my projects using terminal commands. Type <span className="text-[var(--theme-accent)]">help</span> to get started.
+              </div>
             </div>
-          </div>
-        ),
-        timestamp: new Date(),
-      }]);
-      setTimeout(() => inputRef.current?.focus(), 100);
+          ),
+          timestamp: new Date(),
+        }]);
+        inputRef.current?.focus();
+      }, 100);
+      return () => clearTimeout(timer);
     }
   }, [isOpen]);
 

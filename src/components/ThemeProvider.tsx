@@ -17,7 +17,7 @@
 
 'use client';
 
-import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import { createContext, useContext, useEffect, useRef, useState, ReactNode } from 'react';
 import { ThemeName, ColorMode } from '@/types/theme';
 import { getTheme, applyTheme } from '@/lib/themes';
 
@@ -63,40 +63,37 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [themeName, setThemeNameState] = useState<ThemeName>('security');
   const [colorMode, setColorMode] = useState<ColorMode>('dark');
-  const [mounted, setMounted] = useState(false);
+  const mountedRef = useRef(false);
 
   useEffect(() => {
-    setMounted(true);
-    try {
-      const savedTheme = localStorage?.getItem('theme') as ThemeName | null;
-      const savedColorMode = localStorage?.getItem('colorMode') as ColorMode | null;
+    queueMicrotask(() => {
+      try {
+        const savedTheme = localStorage?.getItem('theme') as ThemeName | null;
+        const savedColorMode = localStorage?.getItem('colorMode') as ColorMode | null;
 
-      if (savedTheme) setThemeNameState(savedTheme);
-      if (savedColorMode) setColorMode(savedColorMode);
-    } catch (error) {
-      // Handle localStorage errors gracefully (e.g., in SSR or private browsing)
-      console.warn('Could not access localStorage:', error);
-    }
+        if (savedTheme) setThemeNameState(savedTheme);
+        if (savedColorMode) setColorMode(savedColorMode);
+      } catch (error) {
+        // Handle localStorage errors gracefully (e.g., in SSR or private browsing)
+        console.warn('Could not access localStorage:', error);
+      }
+      mountedRef.current = true;
+    });
   }, []);
 
   useEffect(() => {
-    if (mounted) {
-      const theme = getTheme(themeName, colorMode);
-      applyTheme(theme);
-      document.documentElement.classList.toggle('dark', colorMode === 'dark');
+    const theme = getTheme(themeName, colorMode);
+    applyTheme(theme);
+    document.documentElement.classList.toggle('dark', colorMode === 'dark');
+    if (mountedRef.current) {
       try {
         localStorage?.setItem('theme', themeName);
         localStorage?.setItem('colorMode', colorMode);
       } catch (error) {
         console.warn('Could not save to localStorage:', error);
       }
-    } else {
-      // Apply default theme on initial mount to prevent flash
-      const theme = getTheme(themeName, colorMode);
-      applyTheme(theme);
-      document.documentElement.classList.toggle('dark', colorMode === 'dark');
     }
-  }, [themeName, colorMode, mounted]);
+  }, [themeName, colorMode]);
 
   const setThemeName = (theme: ThemeName) => {
     setThemeNameState(theme);
