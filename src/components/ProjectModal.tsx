@@ -20,7 +20,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { Project } from '@/types/project';
-import { X, Github, ExternalLink, BookOpen, FileText, Package } from 'lucide-react';
+import { X, Github, ExternalLink, BookOpen, FileText, Package, Bug } from 'lucide-react';
 import { useEffect } from 'react';
 
 /**
@@ -300,6 +300,17 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 >
                   <ExternalLink size={18} />
                   <span>Website</span>
+                </a>
+              )}
+              {project.links.bugReport && (
+                <a
+                  href={project.links.bugReport}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2 border border-[var(--theme-primary)] text-[var(--theme-primary)] rounded-lg hover:bg-[var(--theme-primary)]/10 transition-colors"
+                >
+                  <Bug size={18} />
+                  <span>Report a Bug</span>
                 </a>
               )}
             </div>

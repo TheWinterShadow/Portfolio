@@ -76,6 +76,8 @@ export interface ProjectLinks {
   website?: string;
   /** PyPI package URL */
   pypi?: string;
+  /** Bug report / issues URL */
+  bugReport?: string;
 }
 
 /**
