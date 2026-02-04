@@ -206,7 +206,7 @@ export const projects: Project[] = [
     domain: 'Infrastructure',
     description: 'MCP server enabling semantic search over documentation repositories, powered by LanceDB vector embeddings and deployable to Google Cloud Run.',
     longDescription: 'Thoth is an MCP (Model Context Protocol) server that integrates with Claude AI to provide semantic search capabilities over documentation repositories. It features a parallel ingestion pipeline that clones and tracks repositories, generates embeddings with sentence-transformers, and stores them in LanceDB with Google Cloud Storage persistence. Designed for cloud deployment on Google Cloud Run with Terraform-managed infrastructure.',
-    techStack: ['Python', 'LanceDB', 'sentence-transformers', 'Google Cloud', 'Terraform', 'Cloud Run'],
+    techStack: ['Python', 'LanceDB', 'Sentence-Transformers', 'Google Cloud', 'Terraform', 'Cloud Run'],
     features: [
       'Semantic search over documentation with vector embeddings',
       'MCP server for AI assistant integration',
