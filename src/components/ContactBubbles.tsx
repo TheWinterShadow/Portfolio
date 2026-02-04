@@ -112,7 +112,7 @@ export default function ContactBubbles({
         )}
       </motion.a>
       <motion.a
-        href="#contact"
+        href="https://securebywinter.com/contact/"
         onClick={handleContactClick}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
