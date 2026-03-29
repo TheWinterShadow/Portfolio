@@ -127,6 +127,7 @@ export const projects: Project[] = [
       'Infrastructure as Code with CDK',
     ],
     github: 'https://github.com/TheWinterShadow/Owl-Watch',
+    docs: 'https://owl-watch.thewintershadow.com',
   }),
   createProject({
     id: 'lock-and-key',
@@ -144,7 +145,7 @@ export const projects: Project[] = [
       'Interactive CLI with detailed reports',
     ],
     github: 'https://github.com/TheWinterShadow/Lock-And-Key',
-    docs: 'https://thewintershadow.github.io/Lock-And-Key/',
+    docs: 'https://lock-and-key.thewintershadow.com',
     pypi: 'https://pypi.org/project/lock-and-key/',
     featured: true,
   }),
@@ -162,8 +163,8 @@ export const projects: Project[] = [
       'Comprehensive security coverage',
     ],
     github: 'https://github.com/HorizonSec',
-    website: 'https://github.com/HorizonSec/horizon-website',
     featured: true,
+    docs: 'https://horizonsec.org',
   }),
   createProject({
     id: 'the-data-packet',
@@ -180,6 +181,7 @@ export const projects: Project[] = [
       'Docker-first architecture with CI/CD pipeline',
     ],
     github: 'https://github.com/TheWinterShadow/The-Data-Packet',
+    docs: 'https://the-data-packet.thewintershadow.com',
   }),
   createProject({
     id: 'thought-smith',
@@ -196,9 +198,9 @@ export const projects: Project[] = [
       'Native Android and iOS implementations',
     ],
     github: 'https://github.com/TheWinterShadow/thought-smith',
-    website: 'https://github.com/TheWinterShadow/thought-smith',
     bugReport: 'https://github.com/TheWinterShadow/thought-smith/issues/new?template=bug_report.yml',
     featured: true,
+    docs: 'https://thought-smith.thewintershadow.com',
   }),
   createProject({
     id: 'thoth',
@@ -215,6 +217,7 @@ export const projects: Project[] = [
       'Cloud Run deployment with Terraform IaC',
     ],
     github: 'https://github.com/TheWinterShadow/Thoth',
+    docs: 'https://thoth.thewintershadow.com',
   }),
   createProject({
     id: 'whomping-willow',
@@ -231,6 +234,25 @@ export const projects: Project[] = [
       'Interactive topic visualization with PyLDAVis',
     ],
     github: 'https://github.com/TheWinterShadow/Whomping-Willow',
+    docs: 'https://whomping-willow.thewintershadow.com',
+  }),
+  createProject({
+    id: 'ghost-brain',
+    title: 'Ghost Brain',
+    domain: 'Research',
+    type: 'Open Source',
+    description: 'A real-time voice AI virtual assistant that helps take notes, flesh out ideas, and document them through natural conversation.',
+    longDescription: 'Ghost Brain is a real-time voice AI virtual assistant built with FastAPI and Pipecat. Designed to help users brainstorm and document ideas naturally, it orchestrates a high-performance voice pipeline using Deepgram for speech-to-text, Llama-3.3-70B on Groq for ultra-low latency inference, and OpenAI for text-to-speech. The system features a decoupled cloud-native architecture that runs on Google Cloud Run and uses Anthropic Claude 3.5 Sonnet to intelligently format post-call transcripts into detailed notes.',
+    techStack: ['Python', 'FastAPI', 'Pipecat', 'Deepgram', 'Groq', 'OpenAI TTS', 'Cloud Run'],
+    features: [
+      'Real-time voice brainstorming assistant with ultra-low latency',
+      'Phone integration via Twilio and local microphone testing',
+      'Decoupled architecture for zero-latency degradation',
+      'Intelligent post-call transcript summarization into formatted notes with Claude 3.5 Sonnet'
+    ],
+    github: 'https://github.com/TheWinterShadow/ghost-brain',
+    featured: true,
+    docs: 'https://ghost-brain.thewintershadow.com',
   }),
   createProject({
     id: 'hogwarts',
@@ -247,5 +269,6 @@ export const projects: Project[] = [
       'Modular add-on architecture',
     ],
     github: 'https://github.com/TheWinterShadow/Hogwarts',
+    docs: 'https://hogwarts.thewintershadow.com',
   }),
 ];
