@@ -147,7 +147,6 @@ export const projects: Project[] = [
     github: 'https://github.com/TheWinterShadow/Lock-And-Key',
     docs: 'https://lock-and-key.thewintershadow.com',
     pypi: 'https://pypi.org/project/lock-and-key/',
-    featured: true,
   }),
   createProject({
     id: 'horizonsec',
