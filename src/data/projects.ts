@@ -250,7 +250,7 @@ export const projects: Project[] = [
       'Decoupled architecture for zero-latency degradation',
       'Intelligent post-call transcript summarization into formatted notes with Claude 3.5 Sonnet'
     ],
-    github: 'https://github.com/TheWinterShadow/ghost-brain',
+    github: 'https://github.com/TheWinterShadow/ghostbrain',
     featured: true,
     docs: 'https://ghost-brain.thewintershadow.com',
   }),
