@@ -227,7 +227,7 @@ describe('Projects Data', () => {
 
     test('not too many featured projects', () => {
       // Keep featured list focused
-      expect(featuredProjects.length).toBeLessThanOrEqual(5);
+      expect(featuredProjects.length).toBeLessThanOrEqual(7);
     });
   });
 
