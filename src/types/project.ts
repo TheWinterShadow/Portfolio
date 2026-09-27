@@ -21,6 +21,18 @@ export type ProjectDomain =
   | 'Design';         // UI/UX, graphics, visual
 
 /**
+ * Business service categories
+ * Used to organize projects around the services offered to clients,
+ * distinct from the more technical `ProjectDomain` classification.
+ */
+export type ServiceCategory =
+  | 'Cyber Security'   // Security assessments, IAM audits, scanning tools
+  | 'Web Development'  // Sites, web apps, browser-based tools
+  | 'IT Support'        // Troubleshooting, systems setup, ongoing support
+  | 'App Development'  // Native and cross-platform mobile/desktop apps
+  | 'Other';            // Data engineering, AI/ML, cloud infrastructure, research
+
+/**
  * Project type classifications
  * Describes the nature and licensing of a project
  */
@@ -91,6 +103,8 @@ export interface Project {
   title: string;
   /** Primary domain category */
   domain: ProjectDomain;
+  /** Business service category this project demonstrates */
+  serviceCategory: ServiceCategory;
   /** Project type(s) - can be single or multiple */
   type: ProjectType | ProjectType[];
   /** Short description (1-2 sentences) */

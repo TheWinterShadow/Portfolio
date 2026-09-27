@@ -28,9 +28,10 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Terminal, X, Github, Mail, MessageCircle } from 'lucide-react';
+import { Terminal, X, Github, Linkedin, Mail } from 'lucide-react';
 import { projects } from '@/data/projects';
 import { Project } from '@/types/project';
+import { links } from '@/data/links';
 
 /**
  * Represents a single command execution in the terminal history
@@ -418,7 +419,7 @@ export default function CLI({ isOpen, onClose, onNavigateToProject }: CLIProps) 
             <div className="flex items-center gap-2">
               {/* Contact Bubbles */}
               <a
-                href="https://github.com/TheWinterShadow"
+                href={links.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 hover:bg-[var(--theme-surface)] rounded transition-colors group"
@@ -428,21 +429,22 @@ export default function CLI({ isOpen, onClose, onNavigateToProject }: CLIProps) 
                 <Github size={18} className="text-[var(--theme-text-secondary)] group-hover:text-[var(--theme-primary)] transition-colors" />
               </a>
               <a
-                href="mailto:contact@thewintershadow.com"
+                href={links.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 hover:bg-[var(--theme-surface)] rounded transition-colors group"
+                aria-label="LinkedIn"
+                title="LinkedIn"
+              >
+                <Linkedin size={18} className="text-[var(--theme-text-secondary)] group-hover:text-[var(--theme-primary)] transition-colors" />
+              </a>
+              <a
+                href={`mailto:${links.email}`}
                 className="p-2 hover:bg-[var(--theme-surface)] rounded transition-colors group"
                 aria-label="Email"
                 title="Email"
               >
                 <Mail size={18} className="text-[var(--theme-text-secondary)] group-hover:text-[var(--theme-primary)] transition-colors" />
-              </a>
-              <a
-                href="#contact"
-                onClick={onClose}
-                className="p-2 hover:bg-[var(--theme-surface)] rounded transition-colors group"
-                aria-label="Contact"
-                title="Contact"
-              >
-                <MessageCircle size={18} className="text-[var(--theme-text-secondary)] group-hover:text-[var(--theme-primary)] transition-colors" />
               </a>
               <button
                 onClick={onClose}

@@ -6,8 +6,8 @@
  *
  * @description Renders animated contact icons linking to:
  * - GitHub profile
+ * - LinkedIn profile
  * - Email contact
- * - Contact section anchor
  *
  * @author The Winter Shadow
  * @since 1.0.0
@@ -16,7 +16,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Github, Mail, MessageCircle } from 'lucide-react';
+import { Github, Linkedin, Mail } from 'lucide-react';
+import { links } from '@/data/links';
 
 /**
  * Props for the ContactBubbles component
@@ -32,8 +33,8 @@ interface ContactBubblesProps {
  *
  * Displays animated contact and social media links with:
  * - GitHub profile link
+ * - LinkedIn profile link
  * - Email contact link
- * - Smooth scroll to contact section
  * - Hover animations and visual feedback
  *
  * @param props - Component props
@@ -56,19 +57,6 @@ export default function ContactBubbles({
   showLabels = false,
   className = '',
 }: ContactBubblesProps) {
-  /**
-   * Handles click on the contact anchor link
-   * Prevents default and smoothly scrolls to the contact section
-   * @param e - The mouse click event
-   */
-  const handleContactClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    const element = document.querySelector('#contact');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   const containerClass = variant === 'horizontal'
     ? 'flex items-center gap-2'
     : 'flex flex-col items-center gap-3';
@@ -80,7 +68,7 @@ export default function ContactBubbles({
   return (
     <div className={`${containerClass} ${className}`}>
       <motion.a
-        href="https://github.com/TheWinterShadow"
+        href={links.github}
         target="_blank"
         rel="noopener noreferrer"
         whileHover={{ scale: 1.1 }}
@@ -97,7 +85,24 @@ export default function ContactBubbles({
         )}
       </motion.a>
       <motion.a
-        href="mailto:contact@thewintershadow.com"
+        href={links.linkedin}
+        target="_blank"
+        rel="noopener noreferrer"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+        className={linkClass}
+        aria-label="LinkedIn"
+        title="LinkedIn"
+      >
+        <Linkedin size={18} className="text-[var(--theme-text-secondary)] group-hover:text-[var(--theme-primary)] transition-colors" />
+        {showLabels && (
+          <span className="text-sm text-[var(--theme-text-secondary)] group-hover:text-[var(--theme-primary)] transition-colors">
+            LinkedIn
+          </span>
+        )}
+      </motion.a>
+      <motion.a
+        href={`mailto:${links.email}`}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
         className={linkClass}
@@ -108,22 +113,6 @@ export default function ContactBubbles({
         {showLabels && (
           <span className="text-sm text-[var(--theme-text-secondary)] group-hover:text-[var(--theme-primary)] transition-colors">
             Email
-          </span>
-        )}
-      </motion.a>
-      <motion.a
-        href="https://securebywinter.com/contact/"
-        onClick={handleContactClick}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
-        className={linkClass}
-        aria-label="Contact"
-        title="Contact"
-      >
-        <MessageCircle size={18} className="text-[var(--theme-text-secondary)] group-hover:text-[var(--theme-primary)] transition-colors" />
-        {showLabels && (
-          <span className="text-sm text-[var(--theme-text-secondary)] group-hover:text-[var(--theme-primary)] transition-colors">
-            Contact
           </span>
         )}
       </motion.a>

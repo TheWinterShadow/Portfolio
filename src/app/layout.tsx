@@ -8,7 +8,8 @@
  * - HTML document structure with language and hydration settings
  * - Google Fonts preconnection and loading (Inter and JetBrains Mono)
  * - Theme provider for dynamic theming support
- * - Persistent UI controls (ThemeToggle and CLIToggle)
+ * - Site-wide Nav and Footer
+ * - Persistent floating UI controls (ThemeToggle and CLIToggle)
  *
  * @author The Winter Shadow
  * @since 1.0.0
@@ -19,19 +20,21 @@ import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import ThemeToggle from '@/components/ThemeToggle';
 import CLIToggle from '@/components/CLIToggle';
+import Nav from '@/components/Nav';
+import Footer from '@/components/Footer';
 
 /**
  * Page metadata for SEO and social sharing
  * Configures title, description, keywords, and OpenGraph data
  */
 export const metadata: Metadata = {
-  title: 'Project Showcase | The Winter Shadow',
-  description: 'Interactive showcase of projects spanning security, data engineering, web development, and more. Explore via web interface or CLI mode.',
-  keywords: ['projects', 'portfolio', 'showcase', 'security', 'data engineering', 'web development'],
+  title: 'The Winter Shadow | Security, Web & App Development, IT Support',
+  description: 'Elijah Winter (The Winter Shadow) — freelance Security Engineer, Developer, and IT Professional. Cyber security, web development, app development, IT support, and cloud/data engineering services, backed by a portfolio of real, shipped projects.',
+  keywords: ['freelance security engineer', 'web development', 'app development', 'IT support', 'cyber security', 'cloud infrastructure', 'portfolio'],
   authors: [{ name: 'Elijah Winter' }],
   openGraph: {
-    title: 'Project Showcase | The Winter Shadow',
-    description: 'Interactive showcase of projects spanning security, data engineering, web development, and more',
+    title: 'The Winter Shadow | Security, Web & App Development, IT Support',
+    description: 'Freelance Security Engineer, Developer, and IT Professional. Explore services and a portfolio of real, shipped projects.',
     type: 'website',
   },
 };
@@ -69,7 +72,9 @@ export default function RootLayout({
       </head>
       <body className="font-sans antialiased">
         <ThemeProvider>
+          <Nav />
           {children}
+          <Footer />
           <ThemeToggle />
           <CLIToggle />
         </ThemeProvider>

@@ -7,7 +7,7 @@
  * @since 1.0.0
  */
 
-import { ProjectType, Project, ProjectDomain } from '@/types/project';
+import { ProjectType, Project, ProjectDomain, ServiceCategory } from '@/types/project';
 
 /**
  * Helper function to create a project with sensible defaults
@@ -29,6 +29,7 @@ function createProject({
   id,
   title,
   domain,
+  serviceCategory,
   type = 'Open Source',
   description,
   longDescription,
@@ -47,6 +48,7 @@ function createProject({
   id: string;
   title: string;
   domain: ProjectDomain;
+  serviceCategory: ServiceCategory;
   type?: ProjectType | ProjectType[];
   description: string;
   longDescription?: string;
@@ -66,6 +68,7 @@ function createProject({
     id,
     title,
     domain,
+    serviceCategory,
     type,
     description,
     longDescription,
@@ -117,6 +120,7 @@ export const projects: Project[] = [
     id: 'owl-watch',
     title: 'Owl-Watch',
     domain: 'Data Engineering',
+    serviceCategory: 'Other',
     description: 'AWS-native data engineering pipeline using Glue, Bedrock, and ML for ingesting, processing, and curating data with PySpark ETL jobs.',
     longDescription: 'Owl-Watch is a comprehensive data engineering solution built on AWS infrastructure. It leverages AWS Glue for ETL processing, Amazon Bedrock for ML-powered data curation, and PySpark for scalable data transformations. The pipeline is designed to handle large-scale data ingestion and processing workflows with built-in monitoring and error handling.',
     techStack: ['Python', 'TypeScript', 'AWS CDK', 'PySpark', 'AWS Glue', 'Bedrock'],
@@ -133,6 +137,7 @@ export const projects: Project[] = [
     id: 'lock-and-key',
     title: 'Lock-And-Key',
     domain: 'Security',
+    serviceCategory: 'Cyber Security',
     type: ['Open Source', 'Published Package'],
     description: 'Multi-cloud security scanner analyzing IAM and resource-based policies to identify vulnerabilities and excessive permissions across AWS, Azure, and GCP.',
     longDescription: 'Lock-And-Key is a comprehensive security scanning tool that performs deep analysis of IAM policies and resource permissions across major cloud providers. It identifies privilege escalation risks, wildcard permissions, and violations of least privilege principles. The tool provides actionable security insights with detailed reporting and remediation recommendations.',
@@ -152,6 +157,7 @@ export const projects: Project[] = [
     id: 'horizonsec',
     title: 'HorizonSec Project',
     domain: 'Security',
+    serviceCategory: 'Cyber Security',
     description: 'Modular security toolkit integrating directly into developer workflows with GAIA (orchestration), DEMETER (infrastructure scanning), HADES (endpoint security), and ARTEMIS (static analysis).',
     longDescription: 'HorizonSec is an open-source security organization focused on building modular security tools that integrate seamlessly into developer workflows. The project includes multiple specialized tools: GAIA for security orchestration, DEMETER for infrastructure scanning, HADES for endpoint security monitoring, and ARTEMIS for static code analysis. Together, these tools provide comprehensive security coverage throughout the development lifecycle.',
     techStack: ['Python', 'TypeScript', 'Security Tools', 'CI/CD Integration'],
@@ -169,6 +175,7 @@ export const projects: Project[] = [
     id: 'the-data-packet',
     title: 'The-Data-Packet',
     domain: 'Data Engineering',
+    serviceCategory: 'Other',
     description: 'AI-powered automated podcast generation system that transforms tech news articles into professional, multi-speaker podcast episodes using Claude and ElevenLabs.',
     longDescription: 'The Data Packet is an end-to-end automated podcast pipeline that scrapes technology news articles, generates natural dialogue scripts via Anthropic Claude, synthesizes multi-speaker audio with ElevenLabs TTS, and packages everything as distributable podcast episodes with RSS feeds. Built with a Docker-first architecture, MongoDB for episode tracking and deduplication, and AWS S3 for hosting.',
     techStack: ['Python', 'Anthropic Claude', 'ElevenLabs', 'MongoDB', 'AWS S3', 'Docker'],
@@ -186,6 +193,7 @@ export const projects: Project[] = [
     id: 'thought-smith',
     title: 'Thought Smith',
     domain: 'Web Development',
+    serviceCategory: 'App Development',
     description: 'AI-powered journaling app that transforms conversations with AI assistants into structured journal entries, with multi-model support and voice capabilities.',
     longDescription: 'Thought Smith is an AI-powered journaling application that converts journaling into an interactive experience. Users can have conversations with AI assistants from OpenAI, Google Gemini, or Anthropic Claude, which the system then transforms into formatted journal entries in Markdown. The app features voice capabilities with speech-to-text and text-to-speech, export functionality, and a privacy-first architecture where data stays local and API calls go directly to user-selected providers via personal API keys.',
     techStack: ['Kotlin', 'Jetpack Compose', 'Swift', 'SwiftUI', 'OpenAI', 'Gemini', 'Claude'],
@@ -205,6 +213,7 @@ export const projects: Project[] = [
     id: 'thoth',
     title: 'Thoth',
     domain: 'Infrastructure',
+    serviceCategory: 'Other',
     description: 'MCP server enabling semantic search over documentation repositories, powered by LanceDB vector embeddings and deployable to Google Cloud Run.',
     longDescription: 'Thoth is an MCP (Model Context Protocol) server that integrates with Claude AI to provide semantic search capabilities over documentation repositories. It features a parallel ingestion pipeline that clones and tracks repositories, generates embeddings with sentence-transformers, and stores them in LanceDB with Google Cloud Storage persistence. Designed for cloud deployment on Google Cloud Run with Terraform-managed infrastructure.',
     techStack: ['Python', 'LanceDB', 'Sentence-Transformers', 'Google Cloud', 'Terraform', 'Cloud Run'],
@@ -222,6 +231,7 @@ export const projects: Project[] = [
     id: 'whomping-willow',
     title: 'Whomping-Willow',
     domain: 'Research',
+    serviceCategory: 'Other',
     type: 'Research',
     description: 'Python package that simplifies Latent Dirichlet Allocation (LDA) topic modeling workflows with a modular API for data preparation, model building, and visualization.',
     longDescription: 'Whomping-Willow is a Python package designed to streamline LDA topic modeling. It provides a clean API for preparing text data, generating Bag of Words representations with Gensim dictionaries, constructing LDA models, and visualizing results interactively with PyLDAVis.',
@@ -239,6 +249,7 @@ export const projects: Project[] = [
     id: 'ghost-brain',
     title: 'Ghost Brain',
     domain: 'Research',
+    serviceCategory: 'Other',
     type: 'Open Source',
     description: 'A real-time voice AI virtual assistant that helps take notes, flesh out ideas, and document them through natural conversation.',
     longDescription: 'Ghost Brain is a real-time voice AI virtual assistant built with FastAPI and Pipecat. Designed to help users brainstorm and document ideas naturally, it orchestrates a high-performance voice pipeline using Deepgram for speech-to-text, Llama-3.3-70B on Groq for ultra-low latency inference, and OpenAI for text-to-speech. The system features a decoupled cloud-native architecture that runs on Google Cloud Run and uses Anthropic Claude 3.5 Sonnet to intelligently format post-call transcripts into detailed notes.',
@@ -257,6 +268,7 @@ export const projects: Project[] = [
     id: 'obsidian-palace',
     title: 'Obsidian Palace',
     domain: 'Infrastructure',
+    serviceCategory: 'Other',
     description: 'MCP server that gives AI clients (Claude Desktop, Claude Code, claude.ai, OpenCode, OpenAI, Cursor, Gemini) full read/write/search access to your Obsidian vault, self-hosted on GCE with Google OAuth 2.1.',
     longDescription: 'ObsidianPalace bridges your Obsidian vault with AI via the Model Context Protocol. It runs as a single Docker container on a GCE instance (~$15/mo) and exposes five MCP tools: semantic search, note reading, note writing with AI-assisted file placement, and vault browsing. The stack combines FastAPI with the MCP SDK for SSE transport, MemPalace (ChromaDB) for vector search, obsidian-headless for bidirectional vault sync, and Google OAuth 2.0 for authentication. Infrastructure is managed with Terraform and deployed via GitHub Actions CI/CD.',
     techStack: ['Python', 'FastAPI', 'MemPalace', 'ChromaDB', 'Google OAuth', 'Terraform', 'Docker', 'GCE'],
@@ -276,6 +288,7 @@ export const projects: Project[] = [
     id: 'the-curator',
     title: 'The Curator',
     domain: 'Infrastructure',
+    serviceCategory: 'Other',
     type: 'Open Source',
     description: 'MCP server that generates AI-powered podcasts on any topic — Gemini writes the script, Vertex AI TTS voices it, and the episode lands in GCS.',
     longDescription: 'The Curator is a FastMCP server that exposes two tools to any MCP-compatible client (Claude Desktop, Cursor, Zed): create_podcast_transcript generates a natural multi-turn dialogue between hosts Annabelle and Link using Google Gemini, complete with inline emotion tags and pacing cues that shape the audio output. create_podcast_episode synthesizes that transcript into a .wav audio file using Vertex AI TTS with distinct voices per host, then uploads the finished episode to Google Cloud Storage. Authentication is handled via MCP 2.1 OAuth with Google as the identity provider — single-user by design, with OAuth state persisted to GCS so Cloud Run restarts and scale-to-zero events never invalidate active sessions. All infrastructure is managed with Terraform and deployed to Cloud Run via GitHub Actions.',
@@ -295,6 +308,7 @@ export const projects: Project[] = [
     id: 'story-web',
     title: 'Story Web',
     domain: 'Web Development',
+    serviceCategory: 'Web Development',
     type: 'Open Source',
     description: 'Obsidian plugin for capturing plot points and campaign notes as plain markdown, then connecting and grouping them on an interactive graph — on desktop and iPad.',
     longDescription: 'Story Web is an Obsidian community plugin for writers and game masters: jot an idea as a title and a one-line blurb, and it becomes a card on an interactive graph. Cards open the real note on click or tap, can be dragged into place, connected by hand, and grouped into clusters, while ordinary [[wikilinks]] in note bodies show up as edges automatically. Every piece of state (position, group, connections, type) lives in the note\'s YAML frontmatter, written only through Obsidian\'s processFrontMatter API — note bodies are never touched, there is no sidecar file or backend, and uninstalling leaves valid markdown behind. It is built as a custom view on Obsidian\'s public plugin API with Cytoscape.js rather than patching the undocumented Canvas internals, so it survives Obsidian updates, and it is tuned for touch on Obsidian Mobile. Pure model, layout, and text-wrapping logic is unit tested; CI lints with Obsidian\'s own review rules, and releases are built by GitHub Actions with signed build-provenance attestations.',
@@ -314,6 +328,7 @@ export const projects: Project[] = [
     id: 'hermes',
     title: 'Hermes',
     domain: 'Infrastructure',
+    serviceCategory: 'App Development',
     description: 'Privacy-centric macOS transcription tool that captures and transcribes meeting audio entirely on-device using WhisperKit, with no cloud services or telemetry.',
     longDescription: 'Hermes is a native macOS application that provides real-time transcription for video calls (Zoom, Google Meet, Teams, FaceTime) while keeping all audio and transcripts local. It simultaneously captures system audio and microphone input, differentiates speakers as "Me" vs "Them" without ML identification, and runs transcription on-device with WhisperKit\'s large-v3 model. The interface is a floating overlay that collapses to a pill icon, activatable via a global hotkey. Transcripts are stored locally with SwiftData and can be exported as Markdown.',
     techStack: ['Swift', 'SwiftUI', 'WhisperKit', 'Core Audio', 'AVAudioEngine', 'SwiftData'],
@@ -333,6 +348,7 @@ export const projects: Project[] = [
     id: 'janus-coin',
     title: 'Janus Coin',
     domain: 'Web Development',
+    serviceCategory: 'Web Development',
     description: 'Browser-based Multi-Criteria Decision Analysis (MCDA) tool for structured decision-making — compare options across weighted criteria and export results as Markdown reports.',
     longDescription: 'Janus Coin is a fully client-side MCDA tool that solves a specific failure mode: structured thinking that collapses under complexity. A side-by-side spreadsheet works for two options and three criteria; it breaks down at five options and eight with unequal weights. Janus Coin gives you a weighted decision matrix where rows are criteria (with High/Medium/Low priority weights) and columns are subjects (the options under comparison). Fill in evaluation text per cell, color-code sentiment, mark per-criterion winners, then switch to the Results view for a weighted tally. When ready, declare a final winner and export the full comparison as a Markdown file with YAML frontmatter — directly importable into Obsidian. Import from CSV or Markdown table is also supported. The original spec included a FastAPI backend on GCP Cloud Run; the weighted math and Markdown generation turned out to be trivial enough to run entirely in the browser, so the current implementation ships as a zero-backend static app on GitHub Pages.',
     techStack: ['React', 'TypeScript', 'Vite', 'Zustand', 'Tailwind CSS'],
@@ -351,6 +367,7 @@ export const projects: Project[] = [
     id: 'hogwarts',
     title: 'Hogwarts',
     domain: 'Web Development',
+    serviceCategory: 'Web Development',
     description: 'Personal dashboard application aggregating real-time data including local weather, news, IP geolocation, and daily quotes into a single interface.',
     longDescription: 'Hogwarts is a personalized information hub that consolidates multiple data sources into one accessible dashboard. It features IP geolocation conversion, local weather information, local news updates, and daily quotes. Planned expansions include Reddit integration, Spotify daily recommendations, multi-app notifications, and GitLab commit history.',
     techStack: ['HTML', 'CSS', 'JavaScript'],
@@ -363,5 +380,25 @@ export const projects: Project[] = [
     ],
     github: 'https://github.com/TheWinterShadow/Hogwarts',
     docs: 'https://hogwarts.thewintershadow.com',
+  }),
+  createProject({
+    id: 'the-shadow-dungeon',
+    title: 'The Shadow Dungeon',
+    domain: 'Design',
+    serviceCategory: 'Web Development',
+    type: 'Commercial',
+    description: 'Custom-designed and built website, delivered as a client web design and development project.',
+    techStack: ['HTML', 'CSS', 'JavaScript'],
+    website: 'https://theshadowdungeon.com/',
+  }),
+  createProject({
+    id: 'jaqobis',
+    title: 'Jaqobis',
+    domain: 'Design',
+    serviceCategory: 'Web Development',
+    type: 'Commercial',
+    description: 'Custom-designed and built website, delivered as a client web design and development project.',
+    techStack: ['HTML', 'CSS', 'JavaScript'],
+    website: 'http://jaqobis.com/',
   }),
 ];

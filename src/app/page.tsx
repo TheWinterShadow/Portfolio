@@ -2,19 +2,20 @@
  * Home Page - Main Project Showcase
  *
  * @fileoverview The primary landing page for the portfolio, featuring a hero section,
- * featured projects, and a filterable grid of all projects. Includes search functionality,
- * domain/type filtering, and integration with the CLI interface.
+ * featured projects, and a filterable grid of all projects. Includes search functionality
+ * and service-category/type filtering.
  *
  * @description This page serves as the main entry point for visitors, showcasing projects
- * across multiple domains including Security, Data Engineering, Web Development, and more.
- * It features smooth animations using Framer Motion and a responsive design.
+ * across the service categories offered as a business: Cyber Security, Web Development,
+ * IT Support, App Development, and Data/AI/Cloud Infrastructure. It features smooth
+ * animations using Framer Motion and a responsive design.
  *
  * @features
- * - Hero section with animated background and CLI mode access
+ * - Hero section with animated background and primary CTAs
  * - Featured projects showcase
  * - Full project grid with search and filter capabilities
  * - Project modal for detailed views
- * - CLI interface for terminal-style navigation
+ * - Reads `?category=` from the URL to preselect a filter (linked from /services)
  *
  * @author The Winter Shadow
  * @since 1.0.0
@@ -22,14 +23,14 @@
 
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
+import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Terminal, Sparkles, Filter, Search, X } from 'lucide-react';
+import { Sparkles, Filter, Search, X, ArrowUpRight } from 'lucide-react';
 import { projects } from '@/data/projects';
-import { Project, ProjectDomain, ProjectType } from '@/types/project';
+import { Project, ServiceCategory, ProjectType } from '@/types/project';
 import ProjectCard from '@/components/ProjectCard';
 import ProjectModal from '@/components/ProjectModal';
-import CLI from '@/components/CLI';
 import ContactBubbles from '@/components/ContactBubbles';
 
 /**
@@ -39,7 +40,6 @@ import ContactBubbles from '@/components/ContactBubbles';
  * - Animated hero section with call-to-action
  * - Featured projects carousel
  * - Searchable and filterable project grid
- * - CLI modal for terminal-style navigation
  * - Project detail modal
  *
  * @returns The complete home page JSX
@@ -53,17 +53,37 @@ import ContactBubbles from '@/components/ContactBubbles';
 export default function Home() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedDomains, setSelectedDomains] = useState<Set<ProjectDomain>>(new Set());
+  const [selectedCategories, setSelectedCategories] = useState<Set<ServiceCategory>>(new Set());
   const [selectedTypes, setSelectedTypes] = useState<Set<ProjectType>>(new Set());
   const [showFilters, setShowFilters] = useState(false);
-  const [cliOpen, setCliOpen] = useState(false);
 
-  const domains: ProjectDomain[] = ['Security', 'Data Engineering', 'Web Development', 'Infrastructure', 'Research', 'Design'];
+  const categories: ServiceCategory[] = ['Cyber Security', 'Web Development', 'IT Support', 'App Development', 'Other'];
+  const categoryLabels: Record<ServiceCategory, string> = {
+    'Cyber Security': 'Cyber Security',
+    'Web Development': 'Web Development',
+    'IT Support': 'IT Support',
+    'App Development': 'App Development',
+    'Other': 'Data, AI & Cloud',
+  };
   const types: ProjectType[] = ['Open Source', 'Commercial', 'Research', 'Learning', 'Published Package'];
 
   /**
+   * On mount, preselect a category filter from `?category=` in the URL.
+   * Lets the Services page link straight into a filtered view of examples.
+   */
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const category = params.get('category') as ServiceCategory | null;
+    if (category && categories.includes(category)) {
+      setSelectedCategories(new Set([category]));
+      setShowFilters(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  /**
    * Memoized filtered projects based on search query and selected filters
-   * Filters by title, description, tech stack, domain, and project type
+   * Filters by title, description, tech stack, service category, and project type
    */
   const filteredProjects = useMemo(() => {
     return projects.filter((project) => {
@@ -76,7 +96,7 @@ export default function Home() {
         if (!matchesSearch) return false;
       }
 
-      if (selectedDomains.size > 0 && !selectedDomains.has(project.domain)) {
+      if (selectedCategories.size > 0 && !selectedCategories.has(project.serviceCategory)) {
         return false;
       }
 
@@ -88,19 +108,19 @@ export default function Home() {
 
       return true;
     });
-  }, [searchQuery, selectedDomains, selectedTypes]);
+  }, [searchQuery, selectedCategories, selectedTypes]);
 
   /**
-   * Toggles a domain filter on/off
-   * @param domain - The domain to toggle in the filter set
+   * Toggles a service category filter on/off
+   * @param category - The category to toggle in the filter set
    */
-  const toggleDomain = (domain: ProjectDomain) => {
-    setSelectedDomains((prev) => {
+  const toggleCategory = (category: ServiceCategory) => {
+    setSelectedCategories((prev) => {
       const next = new Set(prev);
-      if (next.has(domain)) {
-        next.delete(domain);
+      if (next.has(category)) {
+        next.delete(category);
       } else {
-        next.add(domain);
+        next.add(category);
       }
       return next;
     });
@@ -127,28 +147,12 @@ export default function Home() {
    */
   const clearFilters = () => {
     setSearchQuery('');
-    setSelectedDomains(new Set());
+    setSelectedCategories(new Set());
     setSelectedTypes(new Set());
   };
 
-  const hasActiveFilters = searchQuery || selectedDomains.size > 0 || selectedTypes.size > 0;
+  const hasActiveFilters = searchQuery || selectedCategories.size > 0 || selectedTypes.size > 0;
   const featuredProjects = projects.filter(p => p.featured);
-
-  /**
-   * Handles navigation to a specific project from CLI
-   * Opens the project modal and scrolls to the project card
-   * @param projectId - The ID of the project to navigate to
-   */
-  const handleNavigateToProject = (projectId: string) => {
-    const project = projects.find(p => p.id === projectId);
-    if (project) {
-      setSelectedProject(project);
-      setCliOpen(false);
-      setTimeout(() => {
-        document.getElementById(`project-${project.id}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }, 100);
-    }
-  };
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'var(--theme-bg)' }}>
@@ -199,23 +203,30 @@ export default function Home() {
               <Sparkles className="text-[var(--theme-primary)]" size={48} />
             </motion.div>
             <h1 className="text-5xl md:text-7xl font-bold mb-4">
-              <span className="text-[var(--theme-text)]">Project Showcase</span>
+              <span className="text-[var(--theme-text)]">Elijah Winter</span>
             </h1>
-            <p className="text-xl md:text-2xl text-[var(--theme-text-secondary)] mb-8 max-w-2xl mx-auto">
-              Explore my collection of projects spanning security, data engineering, web development, and more
+            <p className="text-xl md:text-2xl text-[var(--theme-text-secondary)] mb-2 max-w-2xl mx-auto">
+              Security Engineer, Developer &amp; IT Professional
             </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setCliOpen(true)}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--theme-primary)] text-white rounded-lg font-semibold hover:bg-[var(--theme-secondary)] transition-colors shadow-lg mb-4"
-            >
-              <Terminal size={20} />
-              Open CLI Mode
-            </motion.button>
-            <p className="text-sm text-[var(--theme-text-secondary)] mb-6">
-              Navigate projects through terminal commands
+            <p className="text-base md:text-lg text-[var(--theme-text-secondary)] mb-8 max-w-2xl mx-auto">
+              I build and ship security tooling, web apps, native apps, and IT infrastructure &mdash;
+              backed by a portfolio of real, working projects.
             </p>
+            <div className="flex flex-wrap items-center justify-center gap-4 mb-6">
+              <Link
+                href="/services"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--theme-primary)] text-white rounded-lg font-semibold hover:bg-[var(--theme-secondary)] transition-colors shadow-lg cursor-pointer"
+              >
+                View Services
+                <ArrowUpRight size={18} />
+              </Link>
+              <a
+                href="#projects"
+                className="inline-flex items-center gap-2 px-6 py-3 border border-[var(--theme-border)] text-[var(--theme-text)] rounded-lg font-semibold hover:border-[var(--theme-primary)] transition-colors cursor-pointer"
+              >
+                See My Work
+              </a>
+            </div>
 
             {/* Contact Bubbles */}
             <motion.div
@@ -285,7 +296,7 @@ export default function Home() {
       )}
 
       {/* All Projects Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
+      <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 scroll-mt-16">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -297,7 +308,7 @@ export default function Home() {
               All Projects
             </h2>
             <p className="text-lg text-[var(--theme-text-secondary)]">
-              {projects.length} projects across {domains.length} domains
+              {projects.length} projects across {categories.length} service categories
             </p>
           </motion.div>
 
@@ -342,19 +353,19 @@ export default function Home() {
                   className="grid md:grid-cols-2 gap-4 p-4 bg-[var(--theme-surface)] border border-[var(--theme-border)] rounded-lg"
                 >
                   <div>
-                    <h3 className="text-sm font-semibold text-[var(--theme-text)] mb-2">Domain</h3>
+                    <h3 className="text-sm font-semibold text-[var(--theme-text)] mb-2">Category</h3>
                     <div className="flex flex-wrap gap-2">
-                      {domains.map((domain) => (
+                      {categories.map((category) => (
                         <button
-                          key={domain}
-                          onClick={() => toggleDomain(domain)}
+                          key={category}
+                          onClick={() => toggleCategory(category)}
                           className={`px-3 py-1 text-sm rounded transition-all ${
-                            selectedDomains.has(domain)
+                            selectedCategories.has(category)
                               ? 'bg-[var(--theme-primary)] text-white scale-110'
                               : 'bg-[var(--theme-bg)] text-[var(--theme-text-secondary)] hover:bg-[var(--theme-primary)]/20 hover:scale-105'
                           }`}
                         >
-                          {domain}
+                          {categoryLabels[category]}
                         </button>
                       ))}
                     </div>
@@ -426,13 +437,6 @@ export default function Home() {
           )}
         </div>
       </section>
-
-      {/* CLI Component */}
-      <CLI
-        isOpen={cliOpen}
-        onClose={() => setCliOpen(false)}
-        onNavigateToProject={handleNavigateToProject}
-      />
 
       {/* Project Modal */}
       <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
